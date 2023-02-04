@@ -18,6 +18,7 @@
 //###############################################################################
 
 module cylinderBearing(height                  = 7.0,  // Height of the bearing
+                       spacer                  = 0,    // Width of a spacer at the inner ring
 	                   inner_radius            = 4.0,  // Inner ring radius. Half of the diameter
 	                   outer_radius            = 11.0, // Outer ring radius. Half of the diameter
 	                   edge_radius             = 0.5,  // Radii of the inner and outer ring touching the housing and axis
@@ -48,8 +49,11 @@ module cylinderBearing(height                  = 7.0,  // Height of the bearing
 //                        square([radi_diff-2*edge_radius,height-2*edge_radius], center=true);
 //                        circle(r = edge_radius, $fn=16);
 //                   }
-                    square([radi_diff,height], center=true);
-                    square([(ball_radius+space_ball_rings)*2, height + 1], center=true);
+                    union() {
+                      square([radi_diff,height], center=true);
+                      translate([-radi_diff/2,0,0]) square([radi_diff/2,height/2+spacer]);
+                    }
+                    square([(ball_radius+space_ball_rings)*2, 2*(height+spacer)], center=true);
                 }
                 difference() {
                     for (angle = [0:180:180]) {
@@ -88,4 +92,12 @@ module cylinderBearing(height                  = 7.0,  // Height of the bearing
             }
         }
     }
+}
+
+
+if ($preview) {
+    
+  cylinderBearing();
+  
+    
 }

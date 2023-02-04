@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Gondola Lifter                                              #
+//# WindowPainter - Beaded Chain Mount                                          #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -22,63 +22,75 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   Gondola lifter                                                            #
+//#   Configurable beaded chain mount                                           #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
-//#   January 26, 2023                                                          #
+//#   February 3, 2023                                                          #
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
 
-include <./WPConfig.scad>
+include <NopSCADlib/lib.scad>
 
-//Set view
-//$vpt = [-10,-60,15];
-//$vpr = [330,-30,0];
+module beadedChainMount(bcBeadD    = 3.2,   //Bead diameter (+tolerance)
+                        bcBeadS    = 4,     //Bead spacing (distance between center of beads)
+                        bcCordD    = 1,     //Cord diameter
+                        bcOpeningD = 2.8,   //Cord diameter
+                        lengthC    = 4,     //Number of beads to trap
+                        flip       = false) //Change the side of the excess openinh
+{			 
+  mirror([0,flip?1:0,0])
+  difference() {
+    union() {
+      hull() {
+        translate([-0.5,0,0])             sphere(d=bcBeadD+2);    
+        translate([-lengthC*bcBeadS,0,0]) sphere(d=bcBeadD+2);    
+        translate([-0.5,0,-bcBeadS])             sphere(d=bcBeadD+2);    
+        translate([-lengthC*bcBeadS,0,-bcBeadS]) sphere(d=bcBeadD+2);    
+      }
+        
+        
+    }
+    union() {
+      //Bead holes 
+      rotate([0,-45,0]) cylinder(h=20,d=bcOpeningD);                    
+      sphere(d=bcBeadD);  
+      for (i=[bcBeadS:bcBeadS:(lengthC-1)*bcBeadS]) {
+        translate([-i,0,0]) {
+        cylinder(h=20,d=bcOpeningD);                    
+        sphere(d=bcBeadD);  
+      } 
+    }
 
-//servo gear
-module WPServoGear_stl() {  
-  stl("WPServoGear");
+    //Cord slot
+    translate([bcBeadS,0,0]) rotate([0,270,0]) cylinder(h=lengthC*bcBeadS,d=bcCordD);
+    translate([-(lengthC-1)*bcBeadS,-bcCordD/2,0]) cube([lengthC*bcBeadS,bcCordD,bcBeadS]);
 
-  difference() {  
-    linear_extrude(4) involute_gear_profile(.5,16);    
-    sg90SplineCutout();
-  }
-}
+    //Top plane
+    translate([-(lengthC+1)*bcBeadS,-bcBeadD,bcBeadD/2]) cube([(lengthC+2)*bcBeadS,2*bcBeadS,bcBeadS]);
 
-//Lifter
-module WPServoLifter_stl() {  
-  stl("WPServoLifter");
-
-  translate([-12.5,5.5-centre_distance(0.5,16,16)/2,0])
-    linear_extrude(4) involute_rack_profile(0.5, 15, 4);
-
-}
-
-
-
-//! TBD
-module WPGondolaLifter_assembly() {
-  pose([-10,-60,15], [330,-30,0])
-  assembly("WPGondolaLifter") {
-
-
-    transrot([0,0,34],[0,90,0]) WPGondolaPenBearings_assembly();
-
-
-    transrot([0,5.5,0],[0,0,1]) WPServoGear_stl();
+    //Bottom plane
+    translate([-(lengthC+1)*bcBeadS,-bcBeadD,-0.5-2*bcBeadS-bcBeadD/2]) cube([(lengthC+2)*bcBeadS,2*bcBeadS,2*bcBeadS]);
     
-    WPServoLifter_stl();
-      
- 
-    transrot([0,0,-8.75],[0,0,90]) sg90();
-
-  
-  }  
+    //Opening foe excess chain
+    translate([-(lengthC-1)*bcBeadS,bcBeadS,0]) rotate([0,0,180]) rotate_extrude(angle=90) {
+      hull() {  
+        translate([bcBeadS,0,0]) circle(d=bcBeadD);
+        translate([bcBeadS,bcBeadS,0]) circle(d=bcBeadD);
+      }
+    }
+    translate([-(lengthC-1)*bcBeadS,0,0]) cylinder(h=bcBeadS,d=bcBeadD);
+    
+    //Debug
+    *translate([-30,0,-5]) cube([40,8,20]);
+    }
+  }   
 }
 
-if($preview) {
-   $explode = 1;
-   WPGondolaLifter_assembly();
- }
+if ($preview) {
+    
+  //Beaded chain mount
+  beadedChainMount(flip=false);
+    
+}

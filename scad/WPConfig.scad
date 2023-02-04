@@ -37,14 +37,16 @@ include <NopSCADlib/vitamins/nuts.scad>
 include <NopSCADlib/vitamins/stepper_motors.scad>
 include <NopSCADlib/utils/thread.scad>
 
+use <../vitamins/sg90.scad>
+use <../vitamins/pen.scad>
+
 use <../printed/cylinderBearing.scad>
 use <../printed/beadedChainIdler.scad>
 use <../printed/beadedChainPulley.scad>
+use <../printed/beadedChainMount.scad>
 use <../printed/clampScrew.scad>
+use <../printed/penClamp.scad>
 use <../printed/sg90Spline.scad>
-
-use <../vitamins/sg90.scad>
-use <../vitamins/pen.scad>
 
 use <../models/windowFrame.scad>
 
@@ -52,7 +54,7 @@ use <../scad/WPPulley.scad>
 use <../scad/WPAligner.scad>
 use <../scad/WPStepperMount.scad>
 use <../scad/WPStepperShaft.scad>
-use <../scad/WPStepperClamp.scad>
+use <../scad/WPGondolaPen.scad>
 use <../scad/WPGondolaLifter.scad>
 
 //include <NopSCADlib/core.scad>
@@ -78,6 +80,9 @@ bcCordD = 1;   //Cord diameter
 
 //Stepper
 stepperT = NEMA17_40; //type of stepper motor
+
+//Pen
+penD = 20; //Pen diameter
 
 //Color scheme
 //============
