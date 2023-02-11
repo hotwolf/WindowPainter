@@ -33,6 +33,9 @@
 
 include <./WPConfig.scad>
 
+use <../printed/cylinderBearing.scad>
+use <../printed/beadedChainIdler.scad>
+
 //Set view
 $vpt = [-10,-60,15];
 $vpr = [330,-30,0];
@@ -44,7 +47,8 @@ threadProfile = thread_profile(threadPitch / 2.2, threadPitch * 0.25, 60);
 //Idler for beaded chain
 module WPWeightIdler_stl() {
   stl("WPWeightIdler");
-    
+   
+  color(pp2_colour)  
   translate([0,0,-4])  
   cylinderBearing(height                  = 8.0,  // Height of the bearing
 	              inner_radius            = screw_clearance_radius(M3_dome_screw),// Inner ring radius.
@@ -58,6 +62,7 @@ module WPWeightIdler_stl() {
 	              guide_size_ratio        = 0.5,  // Ratio of height of the guidance elevation
 	              ball_guide_height       = 0.8); // Elevation of the guidance element
 
+  color(pp2_colour)
   beadedChainIdler(bcBeadD = bcBeadD, //Bead diameter (+tolerance)
                    bcBeadS = bcBeadS, //Bead spacing (distance between center of beads)
                    bcCordD = bcCordD, //Cord diameter
@@ -91,81 +96,86 @@ module bcHole() {
 module WPWeightTop_stl() {
   stl("WPWeightTop");
 
-  //Top plate
-  difference() {
-    union() {
-      rotate([90,0,0]) rotate_extrude() union() {
-        translate([0,1,0])  square([12,3]);
-        translate([0,0,0])  square([11,4]);
-        translate([11,1,0]) circle(r=1);
+  color(pp2_colour) {
+
+    //Top plate
+    difference() {
+      union() {
+        rotate([90,0,0]) rotate_extrude() union() {
+          translate([0,1,0])  square([12,3]);
+          translate([0,0,0])  square([11,4]);
+          translate([11,1,0]) circle(r=1);
+        }
+      }
+      union() {
+        transrot([0,0,10],[0,0,90]) bcHole();  
+        transrot([0,0,-10],[180,0,90]) bcHole();  
+      }
+    } 
+  
+    //Idler enclosure  
+    difference() {
+      union() {  
+        transrot([0,-4,0],[90,0,0]) cylinder(h=30,d=24);
+      }
+      union() {
+        translate([-4.5,-29,-15]) cube([9,26,30]);
+        translate([0,-29,-15]) cylinder(h=30,d=9);
+        transrot([-15,-16.5,0],[0,90,0]) cylinder(h=30,r=screw_clearance_radius(M3_dome_screw));
+        transrot([-16,-16.5,0],[0,90,0]) cylinder(h=8,d=screw_boss_diameter(M3_dome_screw));
+        transrot([8,-16.5,0],[0,90,0]) cylinder(h=8,r=screw_nut_radius(M3_dome_screw)+0.2,$fn=6);
       }
     }
-    union() {
-      transrot([0,0,10],[0,0,90]) bcHole();  
-      transrot([0,0,-10],[180,0,90]) bcHole();  
-    }
-  } 
-  
-  //Idler enclosure  
-  difference() {
-    union() {  
-      transrot([0,-4,0],[90,0,0]) cylinder(h=30,d=24);
-    }
-    union() {
-      translate([-4.5,-29,-15]) cube([9,26,30]);
-      translate([0,-29,-15]) cylinder(h=30,d=9);
-      transrot([-15,-16.5,0],[0,90,0]) cylinder(h=30,r=screw_clearance_radius(M3_dome_screw));
-      transrot([-16,-16.5,0],[0,90,0]) cylinder(h=8,d=screw_boss_diameter(M3_dome_screw));
-      transrot([8,-16.5,0],[0,90,0]) cylinder(h=8,r=screw_nut_radius(M3_dome_screw)+0.2,$fn=6);
-    }
-  }
     
-  //Male thread
-  difference() {
-    union() {
-      transrot([0,-49,0],[90,0,180])  
-      thread(dia     = 17, 
-             pitch   = threadPitch, 
-             length  = 15, 
-             profile = threadProfile,
-             center  = false, 
-             top     = 0, 
-             bot     = -1, 
-             starts  = 1, 
-             solid   = true, 
-             female  = false);
-    }
-    union() {
-      transrot([0,-51.5,0],[90,0,180]) cylinder(h=17,d=15);
+    //Male thread
+    difference() {
+      union() {
+        transrot([0,-49,0],[90,0,180])  
+        thread(dia     = 17, 
+               pitch   = threadPitch, 
+               length  = 15, 
+               profile = threadProfile,
+               center  = false, 
+               top     = 0, 
+               bot     = -1, 
+               starts  = 1, 
+               solid   = true, 
+               female  = false);
+      }
+      union() {
+        transrot([0,-51.5,0],[90,0,180]) cylinder(h=17,d=15);
+      }
     }
   }
 }
 
 module WPWeightBottom_stl() {
   stl("WPWeightBottom");
-    
-  //Female thread  
-      transrot([0,-49,0],[90,0,180])  
-      thread(dia     = 22, 
-             pitch   = threadPitch, 
-             length  = 15, 
-             profile = threadProfile,
-             center  = false, 
-             top     = 0, 
-             bot     = 0, 
-             starts  = 1, 
-             solid   = true, 
-             female  = true);
+  
+  color(pp2_colour) {  
+    //Female thread  
+        transrot([0,-49,0],[90,0,180])  
+        thread(dia     = 22, 
+               pitch   = threadPitch, 
+               length  = 15, 
+               profile = threadProfile,
+               center  = false, 
+               top     = 0, 
+               bot     = 0, 
+               starts  = 1, 
+               solid   = true, 
+               female  = true);
 
-  //Weight container
-  difference() {
-    union() {
-      transrot([0,-34,0],[90,0,0]) cylinder(h=60,d=24);
-      translate([0,-94,0])         sphere(d=24); 
-    }   
-    union() {
-      transrot([0,-30,0],[90,0,0]) cylinder(h=64,d=22);
-      translate([0,-94,0])         sphere(d=22); 
+    //Weight container
+    difference() {
+      union() {
+        transrot([0,-34,0],[90,0,0]) cylinder(h=60,d=24);
+        translate([0,-94,0])         sphere(d=24); 
+      }   
+      union() {
+        transrot([0,-30,0],[90,0,0]) cylinder(h=64,d=22);
+        translate([0,-94,0])         sphere(d=22); 
+      }
     }   
   }
 }
@@ -175,21 +185,23 @@ module WPWeight_assembly() {
   pose([-10,-60,15], [330,-30,0])
   assembly("WPWeight") {
   
-    difference() { 
-      WPWeightTop_stl();
-      *box(-100,100,0,100,-100,100);
+    rotate([0,90,0]) { 
+      difference() { 
+        WPWeightTop_stl();
+        *box(-100,100,0,100,-100,100);
+      }
+      transrot([0,-16.5,0],[0,90,0])   explode([-30,0,0]) WPWeightIdler_stl();
+      transrot([8,-16.5,0],[0,90,0])   explode(10) nut(M3_nut);  
+      transrot([-8,-16.5,0],[0,270,0]) screw_and_washer(M3_dome_screw,20);  
+      explode([0,-20,0]) difference() { 
+        WPWeightBottom_stl();
+        *rotate([0,0,0]) box(-100,100,0,100,-100,100);
+      }  
     }
-    transrot([0,-16.5,0],[0,90,0])   explode([-30,0,0]) WPWeightIdler_stl();
-    transrot([8,-16.5,0],[0,90,0])   explode(10) nut(M3_nut);  
-    transrot([-8,-16.5,0],[0,270,0]) screw_and_washer(M3_dome_screw,20);  
-    explode([0,-20,0]) difference() { 
-      WPWeightBottom_stl();
-      *rotate([0,0,0]) box(-100,100,0,100,-100,100);
-    }  
   }  
 }
 
 if($preview) {
-   $explode = 1;
+   $explode = 0;
    WPWeight_assembly();
  }

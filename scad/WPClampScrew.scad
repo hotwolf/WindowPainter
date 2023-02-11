@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Beaded Chain Pulley                                         #
+//# WindowPainter - Clamp Screw Assembly                                        #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -22,66 +22,49 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   Fixture to align the beaded chain to the center of the stepper shaft      #
+//#   Clamp screw assembly                                                      #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
-//#   January 20, 2023                                                          #
+//#   February 10, 2023                                                         #
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
 
 include <WPConfig.scad>
 
-use <../printed/beadedChainPulley.scad>
-
 //Set view
-$vpt = [8,10,20];
-$vpr = [72,0,75];
-
-//Pulley for beaded chain
-module WPPulley_stl() {
-  stl("WPPulley");
-
-  color(pp2_colour)
-  difference() {
-    union() {
-      beadedChainPulley(bcBeadD = bcBeadD, //Bead diameter (+tolerance)
-                        bcBeadS = bcBeadS, //Bead spacing (distance between center of beads)
-                        bcCordD = bcCordD, //Cord diameter
-                        boreD   = 2,       //Bore diameter
-                        guideN  = 32,      //Number of beads on the chain guide
-                        outerD  = 45,      //Outter diameter
-                        guideW  = 6,       //Width of the chain guide 
-                        outerW  = 8);      //Outer width
-
-      translate([0,0,4]) cylinder(h=6,d=16);
-    }
-    union() {
-      transrot([0,0,7],[90,0,0]) cylinder(h=10,r=screw_clearance_radius(M3_pan_screw));
-      transrot([-0.1-nut_square_width(M3nS_thin_nut)/2,-4.1-nut_square_thickness(M3nS_thin_nut),6.9-nut_square_width(M3nS_thin_nut)/2],[0,0,0]) 
-        cube([nut_square_width(M3nS_thin_nut)+0.2,nut_square_thickness(M3nS_thin_nut)+0.2,10]);
-      difference() {
-        translate([0,0,3]) cylinder(d=5,h=20,center=true);
-        translate([0,-3,3]) cube([8,2,20],center=true);
-      }
-    }
-  } 
+//$vpt = [25,30,20];
+//$vpr = [80,0,340];
+  
+module WPClampScrewGrip_stl() {
+  stl("WPClampScrewGrip");
+  color(pp1_colour)
+  screwClampGrip(type=M5_hex_screw);
 }
 
-//! TBD
-module WPPulley_assembly() {
-  pose([8, 10, 20], [72,0,75])
-  assembly("WPPulley") {
+module WPClampScrewShoe_stl() {
+  stl("WPClampScrewShoe");
+  color(pp1_colour)
+  screwClampShoe(type=M5_hex_screw,length=20);
+}
+*WPClampScrewShoe_stl();
 
-    WPPulley_stl();
-    transrot([0,-4,7],[90,0,0])  explode([0,15,0]) nut_square(M3nS_thin_nut);
-    transrot([0,-10,7],[90,0,0]) explode([0,0,15])screw(M3_pan_screw,8);
-    
+//Just in case
+module WPClampScrew_assembly() {
+  pose([25,30,20], [80,0,240])
+//WPClampScrewShoe_stl();
+    assembly("WPClampScrew") {
+        
+    explode(30)  WPClampScrewGrip_stl(); 
+    explode(10)  WPClampScrewShoe_stl();
+    explode(20)  screw(M5_hex_screw, 20);
   }
 }
+ *WPClampScrew_assembly();
 
-if($preview) {   
-   $explode = 1;
-   WPPulley_assembly();
+if($preview) {
+    $explode = 1;
+    WPClampScrew_assembly();
+    
 }

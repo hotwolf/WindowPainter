@@ -61,17 +61,19 @@ module windowFrame(xOffset=0,
     }
     
     //Frame
-    color("Ivory") difference() {
+    difference() {
       union() {
+        color("WhiteSmoke")   
         translate([-frameWidth,-glassHeight-frameWidth,0]) 
           cube([glassWidth+2*frameWidth,
                 glassHeight+2*frameWidth,
                 frameInnerDepth]);
+        color("Gainsboro") 
         translate([-frameWidth-clearance,-glassHeight-frameWidth-clearance,-glassDepth]) 
           cube([glassWidth+2*frameWidth+2*clearance,
                 glassHeight+2*frameWidth+2*clearance,
                 glassDepth+frameInnerDepth-frameOuterDepth]);
-      }  
+      }
       translate([0,-glassHeight,-glassDepth-10]) cube([glassWidth,glassHeight,frameInnerDepth+glassDepth+20]);
     }
 

@@ -51,7 +51,7 @@ module screwClampGrip(type=M5_hex_screw) {
 }
 
 module screwClampShoe(type=M5_hex_screw,length=20) {
-   
+
   difference() {  
     rotate_extrude() hull() {
       translate([1+screw_radius(type),4-length,0]) circle(d=2);

@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Beaded Chain Pulley                                         #
+//# WindowPainter - Main Assembly                                               #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -22,7 +22,7 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   Fixture to align the beaded chain to the center of the stepper shaft      #
+//#   Main assembly of the WindowPainter.                                       #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
@@ -31,57 +31,46 @@
 //#                                                                             #
 //###############################################################################
 
-include <WPConfig.scad>
+include <./WPConfig.scad>
 
-use <../printed/beadedChainPulley.scad>
+use <../scad/WPStepperClamp.scad>
+use <../scad/WPGondolaPen.scad>
+use <../scad/WPWeight.scad>
 
 //Set view
-$vpt = [8,10,20];
-$vpr = [72,0,75];
+//$vpt = [25,30,20];
+//$vpr = [80,0,340];
 
-//Pulley for beaded chain
-module WPPulley_stl() {
-  stl("WPPulley");
+//! A vertical plotter absed on therv . 
+//! ![inside](doc/DIYLB.gif?raw=true)
 
-  color(pp2_colour)
-  difference() {
-    union() {
-      beadedChainPulley(bcBeadD = bcBeadD, //Bead diameter (+tolerance)
-                        bcBeadS = bcBeadS, //Bead spacing (distance between center of beads)
-                        bcCordD = bcCordD, //Cord diameter
-                        boreD   = 2,       //Bore diameter
-                        guideN  = 32,      //Number of beads on the chain guide
-                        outerD  = 45,      //Outter diameter
-                        guideW  = 6,       //Width of the chain guide 
-                        outerW  = 8);      //Outer width
+//! Finished!
+module main_assembly() {
+  //pose([30, 0, 0], [150,150,0])
+    assembly("main") {
 
-      translate([0,0,4]) cylinder(h=6,d=16);
+      //Left stepper
+      WPStepperClampLeft_assembly();
+
+      //Right stepper
+      WPStepperClampRight_assembly();
+
+      //Gondola
+      translate([gondolaX,gondolaY,0]) WPGondolaPenBearings_assembly();
+
+      //Left weight
+      translate([-weightOffsX,-weightLeftY,0]) WPWeight_assembly();
+        
+      //Right weight
+      translate([winW+weightOffsX,-weightRightY,0]) WPWeight_assembly();
+
+      //Window frame
+      translate([0,0,-44]) windowFrame(glassHeight=winH,
+                                       glassWidth=winW); 
     }
-    union() {
-      transrot([0,0,7],[90,0,0]) cylinder(h=10,r=screw_clearance_radius(M3_pan_screw));
-      transrot([-0.1-nut_square_width(M3nS_thin_nut)/2,-4.1-nut_square_thickness(M3nS_thin_nut),6.9-nut_square_width(M3nS_thin_nut)/2],[0,0,0]) 
-        cube([nut_square_width(M3nS_thin_nut)+0.2,nut_square_thickness(M3nS_thin_nut)+0.2,10]);
-      difference() {
-        translate([0,0,3]) cylinder(d=5,h=20,center=true);
-        translate([0,-3,3]) cube([8,2,20],center=true);
-      }
-    }
-  } 
 }
 
-//! TBD
-module WPPulley_assembly() {
-  pose([8, 10, 20], [72,0,75])
-  assembly("WPPulley") {
-
-    WPPulley_stl();
-    transrot([0,-4,7],[90,0,0])  explode([0,15,0]) nut_square(M3nS_thin_nut);
-    transrot([0,-10,7],[90,0,0]) explode([0,0,15])screw(M3_pan_screw,8);
+if($preview||true) {
     
-  }
-}
-
-if($preview) {   
-   $explode = 1;
-   WPPulley_assembly();
+  main_assembly();
 }

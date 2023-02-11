@@ -31,10 +31,13 @@
 //#                                                                             #
 //###############################################################################
 
+//include <NopSCADlib/global_defs.scad>
 include <NopSCADlib/lib.scad>
+//include <NopSCADlib/core.scad>
 include <NopSCADlib/vitamins/screws.scad>
 include <NopSCADlib/vitamins/nuts.scad>
 include <NopSCADlib/vitamins/stepper_motors.scad>
+include <NopSCADlib/vitamins/microswitches.scad>
 include <NopSCADlib/utils/thread.scad>
 
 use <../vitamins/sg90.scad>
@@ -52,47 +55,59 @@ use <../models/windowFrame.scad>
 
 use <../scad/WPPulley.scad>
 use <../scad/WPAligner.scad>
+use <../scad/WPClampScrew.scad>
 use <../scad/WPStepperMount.scad>
 use <../scad/WPStepperShaft.scad>
+use <../scad/WPStepperClamp.scad>
+use <../scad/WPEndstop.scad>
 use <../scad/WPGondolaPen.scad>
 use <../scad/WPGondolaLifter.scad>
-
-//include <NopSCADlib/core.scad>
-//include <NopSCADlib/vitamins/extrusions.scad>
-//include <NopSCADlib/vitamins/screws.scad>
-//include <NopSCADlib/vitamins/belts.scad>
-//include <NopSCADlib/vitamins/pulleys.scad>
-//include <NopSCADlib/vitamins/ball_bearings.scad>
-//include <NopSCADlib/vitamins/rod.scad>
-//include <NopSCADlib/vitamins/rails.scad>
 
 //Global variables
 //================
 
 //Window size
-winH   =  400; //Window height
-winW   =  200; //Window width
+winW   = 1000; //Window width
+winH   =  800; //Window height
+
+//Gondola position (origin is the upper left window corner)
+gondolaX =  winW/2+0.4*winW*cos(360*$t);             //X coordiate of the gondola
+gondolaY = -winH/2-0.4*winW*cos(360*$t)*sin(360*$t); //Y coordinate of the gondola
+//gondolaX =  winW; //X coordiate of the gondola
+//gondolaY = -winH; //Y coordinate of the gondola
+
 
 //Beaded chain
 bcBeadD = 3.2; //Bead diameter (+tolerance)
 bcBeadS = 4;   //Bead spacing (distance between center of beads)
 bcCordD = 1;   //Cord diameter
 
-//Stepper
-stepperT = NEMA17_40; //type of stepper motor
+//Steppers
+stepperT      = NEMA17_40; //type of stepper motor
+stepperOffsX  = 50;        //X offset between the window corner and the stepper center
+stepperOffsY  = 50;        //Y offset between the window corner and the stepper center
+stepperS      = winW +2*stepperOffsX; //Distance between the stepper centers
+stepperLeftA  = atan((gondolaY+stepperOffsY)/(gondolaX+stepperOffsY));
+stepperRightA = atan((winW-gondolaY+stepperOffsY)/(gondolaX+stepperOffsY));
+//echo("stepperLeftA  = ", stepperLeftA); 
+//echo("stepperRightA = ", stepperRightA); 
+
+//Weights
+weightOffsX    = stepperOffsX+10+64/PI;
+weightOffsY    = 60; //Endstop Y offset (relative to the window corner)
+weightMaxLiftS = sqrt(pow(winW+stepperOffsX,2)+pow(winH+stepperOffsY,2));
+weightLeftY    = weightOffsY+(weightMaxLiftS-sqrt(pow(gondolaX+stepperOffsX,2)+pow(gondolaY-stepperOffsY,2)))/2;
+weightRightY   = weightOffsY+(weightMaxLiftS-sqrt(pow(winW-gondolaX+stepperOffsX,2)+pow(gondolaY-stepperOffsY,2)))/2;
+//echo("weightLeftY  = ", weightLeftY); 
+//echo("weightRightY = ", weightRightY); 
 
 //Pen
 penD = 20; //Pen diameter
 
 //Color scheme
 //============
-//objC      = "yellow"; //Object color
-//filC      = "orange"; //Filament color
-//errC      = "red";    //Error color
-//cavC      = "blue";   //Cavity color
-//ghC       = "blue";   //Grip hole color
-//dimC      = "gray";   //Color of dimension indicators
-//labC      = "gray";   //Label color
+pp1_colour = "Orange"; //for static parts
+pp2_colour = "Coral";  //for moving parts
 
 //Common operations
 //=================

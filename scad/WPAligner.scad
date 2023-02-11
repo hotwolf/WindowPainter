@@ -33,6 +33,9 @@
 
 include <./WPConfig.scad>
 
+use <../printed/cylinderBearing.scad>
+use <../printed/beadedChainIdler.scad>
+
 //Set view
 $vpt = [42,8,11];
 $vpr = [60,0,340];
@@ -40,11 +43,12 @@ $vpr = [60,0,340];
 //Idler for beaded chain
 module WPAlignerIdler_stl() {
   stl("WPAlignerIdler");
-    
+
+  color(pp2_colour) 
   translate([0,0,-4])  
   cylinderBearing(height                  = 8.0,  // Height of the bearing
 	              inner_radius            = 2.6,  // Inner ring radius. Half of the diameter
-	              outer_radius            = 8.0, // Outer ring radius. Half of the diameter
+	              outer_radius            = 8.0,  // Outer ring radius. Half of the diameter
 	              edge_radius             = 0.5,  // Radii of the inner and outer ring touching the housing and axis
 	              ball_radius             = 2.0,  // Dimension of the rolling element
 	              ball_edge_radius        = 0.3,  // Edge Radii of the rolling element
@@ -54,6 +58,7 @@ module WPAlignerIdler_stl() {
 	              guide_size_ratio        = 0.5,  // Ratio of height of the guidance elevation
 	              ball_guide_height       = 0.8); // Elevation of the guidance element
 
+  color(pp2_colour) 
   beadedChainIdler(bcBeadD = bcBeadD, //Bead diameter (+tolerance)
                    bcBeadS = bcBeadS, //Bead spacing (distance between center of beads)
                    bcCordD = bcCordD, //Cord diameter
@@ -137,6 +142,7 @@ module WPAligner() {
 
 module WPAlignerRight_stl() {
   stl("WPAlignerRight");
+  color(pp2_colour)
   difference() { 
     WPAligner();
     union() {
@@ -148,6 +154,7 @@ module WPAlignerRight_stl() {
 
 module WPAlignerLeft_stl() {
   stl("WPAlignerLeft");
+  color(pp2_colour)
   difference() {
     mirror([0,1,0]) WPAligner();
     union() {

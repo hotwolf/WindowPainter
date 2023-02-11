@@ -33,18 +33,22 @@
 
 include <./WPConfig.scad>
 
+use <./WPPulley.scad>
+use <./WPAligner.scad>
+use <./WPStepperMount.scad>
+
 //Set view
-$vpt = [25,30,20];
-$vpr = [80,0,340];
+//$vpt = [25,30,20];
+//$vpr = [80,0,340];
 
 //! TBD
 module WPStepperShaftRight_assembly() {
   pose([25,30,20], [80,0,240])
   assembly("WPStepperShaftRight") {
 
-    transrot([0,0,0],  [0,0,0]) explode(50) WPPulley_assembly();
-    transrot([0,0,0],  [0,0,0]) explode(30) WPAlignerRight_assembly();
-    transrot([0,0,0],  [0,0,0]) WPStepperMountRight_assembly();
+    transrot([0,0,0],  [0,0,0]) explode(50)             WPPulley_assembly();
+    transrot([0,0,0],  [0,0,stepperRightA]) explode(30) WPAlignerRight_assembly();
+    transrot([0,0,0],  [0,0,0])                         WPStepperMountRight_assembly();
               
   }
 }
@@ -53,10 +57,10 @@ module WPStepperShaftRight_assembly() {
 module WPStepperShaftLeft_assembly() {
     pose([25,30,20], [80,0,180])
     assembly("WPStepperShaftLeft") {
- 
-      transrot([0,0,0],  [0,0,0]) explode(50) WPPulley_assembly();
-      transrot([0,0,0],  [0,0,0]) explode(30) WPAlignerLeft_assembly();
-      transrot([0,0,0],  [0,0,0]) WPStepperMountLeft_assembly();    
+
+      transrot([0,0,0],  [0,0,0])                explode(50) WPPulley_assembly();
+      transrot([0,0,0],  [0,0,270-stepperLeftA]) explode(30) WPAlignerLeft_assembly();
+      transrot([0,0,0],  [0,0,0])                WPStepperMountLeft_assembly();    
         
     }
 }

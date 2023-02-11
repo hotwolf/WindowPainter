@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Stepper Motor Clamp Assembly                                #
+//# WindowPainter - Endstop Assembly                                            #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -22,23 +22,53 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   Stepper motor clamp assembly of the WindowPainter.                        #
+//#   Endstop with SS-GL5 microswitch.                                          #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
-//#   January 25, 2023                                                          #
+//#   February 5, 2023                                                          #
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
 
 include <./WPConfig.scad>
 
-use <./WPClampScrew.scad>
-use <./WPStepperShaft.scad>
-
 //Set view
 //$vpt = [25,30,20];
 //$vpr = [80,0,340];
+
+
+module ss_gl5() {
+    
+  translate([4.8-14.5,-5.1-1.5,0]) microswitch(medium_microswitch);    
+  color("silver") {
+    transrot([-17,-1.5,-1.8],[0,0,18]) cube([17,0.5,3.6]);
+    translate([-17,-3,-1.8]) cube([0.5,1.8,3.6]);
+  }   
+}
+*ss_gl5();
+
+//Endstop
+module WPEndstop() {
+ rotate_extrude () intersection() {    
+    translate([0,-2,0]) square([4,4]);
+    translate([5.5,0,0]) circle(r=2.5);
+  }
+}
+
+module WPEndstopRight_stl() {
+  stl("WPEndstopRight");
+  WPEndstop();
+}
+
+module WPEndstopRight_assembly() {
+  pose([25,30,20], [80,0,240])
+  assembly("WPEndstopRight") {
+  
+      WPEndstopRight_stl();
+  }
+}
+WPEndstopRight_assembly();
 
 module WPStepperClamp () {
 
@@ -101,16 +131,15 @@ module WPStepperClamp () {
     }
   }     
 }
+*WPStepperClamp();
 
 module WPStepperClampLeft_stl() {
   stl("WPStepperClampLeft");
-  color(pp1_colour)
   WPStepperClamp();
 }
 
 module WPStepperClampRight_stl() {
   stl("WPStepperClampRight");
-  color(pp1_colour)
   mirror([1,0,0]) WPStepperClamp();
 }
 
@@ -126,18 +155,18 @@ module WPStepperClampRight_assembly() {
       explode([0,0,-20]) transrot([-45,-16,-24],[90,30,0]) nut(M5_nut);  
       transrot([-45,-22-8,-24],[90,0,0]) {
         explode(45)  screw(M5_hex_screw, 20);
-        explode(55)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
+        explode(55)  screwClampGrip(type=M5_hex_screw); 
+        explode(-10) screwClampShoe(type=M5_hex_screw,length=20);
       }       
       transrot([-20,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
       transrot([-22-8,-45,-24],[0,270,0]) {
         explode(20)   screw(M5_hex_screw, 20);
-        explode(30)   WPClampScrewGrip_stl(); 
-        explode(-10)  WPClampScrewShoe_stl();
+        explode(30)   screwClampGrip(type=M5_hex_screw); 
+        explode(-10) screwClampShoe(type=M5_hex_screw,length=20);
       }
        
       //Stepper    
-      explode([0,0,20]) transrot([stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftRight_assembly();
+      explode([0,0,20]) transrot([50,50,0],[180,0,270]) WPStepperShaftRight_assembly();
     }
   }
 }
@@ -154,19 +183,18 @@ module WPStepperClampLeft_assembly() {
       explode([0,0,-20]) transrot([45,-16,-24],[90,30,0]) nut(M5_nut);  
       transrot([45,-22-8,-24],[90,0,0]) {
         explode(45)  screw(M5_hex_screw, 20);
-        explode(55)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
+        explode(55)  screwClampGrip(type=M5_hex_screw); 
+        explode(-10) screwClampShoe(type=M5_hex_screw,length=20);
       }       
       transrot([16,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
       transrot([22+8,-45,-24],[0,90,0]) {
-        explode(20)  screw(M5_hex_screw, 20);
-        explode(30)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
+        explode(20)   screw(M5_hex_screw, 20);
+        explode(30)   screwClampGrip(type=M5_hex_screw); 
+        explode(-10) screwClampShoe(type=M5_hex_screw,length=20);
       }
        
       //Stepper    
-      explode([0,0,20]) transrot([-stepperOffsX,stepperOffsY,0],[180,0,270])
-        WPStepperShaftLeft_assembly();
+      explode([0,0,20]) transrot([-50,50,0],[180,0,270]) WPStepperShaftLeft_assembly();
     }
   }
 }
@@ -174,8 +202,10 @@ module WPStepperClampLeft_assembly() {
 if($preview) {
 //   $explode = 1;
    WPStepperClampRight_assembly();
-   WPStepperClampLeft_assembly();
+   *WPStepperClampLeft_assembly();
    
-   *translate([0,0,-44]) windowFrame(glassHeight=winH,
+  
+    
+   translate([0,0,-44]) windowFrame(glassHeight=winH,
                                     glassWidth=winW); 
 }
