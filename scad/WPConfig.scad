@@ -53,13 +53,13 @@ use <../printed/sg90Spline.scad>
 
 use <../models/windowFrame.scad>
 
-use <../scad/WPPulley.scad>
-use <../scad/WPAligner.scad>
-use <../scad/WPClampScrew.scad>
-use <../scad/WPStepperMount.scad>
-use <../scad/WPStepperShaft.scad>
-use <../scad/WPStepperClamp.scad>
-use <../scad/WPEndstop.scad>
+//use <../scad/WPPulley.scad>
+//use <../scad/WPAligner.scad>
+//use <../scad/WPClampScrew.scad>
+//use <../scad/WPStepperMount.scad>
+//use <../scad/WPStepperShaft.scad>
+//use <../scad/WPStepperClamp.scad>
+//use <../scad/WPEndstop.scad>
 use <../scad/WPGondolaPen.scad>
 use <../scad/WPGondolaLifter.scad>
 

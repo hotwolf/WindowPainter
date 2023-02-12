@@ -33,7 +33,7 @@
 
 include <./WPConfig.scad>
 
-use <../scad/WPStepperClamp.scad>
+use <../scad/WPStepper.scad>
 use <../scad/WPGondolaPen.scad>
 use <../scad/WPWeight.scad>
 
@@ -50,10 +50,10 @@ module main_assembly() {
     assembly("main") {
 
       //Left stepper
-      WPStepperClampLeft_assembly();
+      WPStepperLeft_assembly();
 
       //Right stepper
-      WPStepperClampRight_assembly();
+      WPStepperRight_assembly();
 
       //Gondola
       translate([gondolaX,gondolaY,0]) WPGondolaPenBearings_assembly();

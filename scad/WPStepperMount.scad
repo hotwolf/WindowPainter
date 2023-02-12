@@ -44,7 +44,7 @@ include <./WPConfig.scad>
 //}
 
 
-module WPStepperMount () {
+module WPStepperMount(inlay=true) {
   difference() {
     union() {
       hull() {  
@@ -64,8 +64,8 @@ module WPStepperMount () {
  
       hull() {
         hull() {  
-          translate([ 8+NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8,$fn=16);  
-          translate([-8-NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8,$fn=16);
+          translate([ 8+NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);  
+          translate([-8-NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);
           translate([   NEMA_hole_pitch(stepperT)/2,   NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);  
           translate([  -NEMA_hole_pitch(stepperT)/2,   NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);
         }  
@@ -76,8 +76,8 @@ module WPStepperMount () {
       }
       hull() {
         hull() {  
-          translate([-8-NEMA_hole_pitch(stepperT)/2,-8-NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8,$fn=16);  
-          translate([-8-NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8,$fn=16); 
+          translate([-8-NEMA_hole_pitch(stepperT)/2,-8-NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);  
+          translate([-8-NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8); 
           translate([  -NEMA_hole_pitch(stepperT)/2,  -NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);  
           translate([  -NEMA_hole_pitch(stepperT)/2,   NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=2,d=8);
        }  
@@ -87,6 +87,11 @@ module WPStepperMount () {
         }  
       }
  
+      translate([-9-NEMA_hole_pitch(stepperT)/2,-1-NEMA_hole_pitch(stepperT)/2,10]) cylinder(h=4,d1=3,d2=2); 
+      translate([-9-NEMA_hole_pitch(stepperT)/2, 1+NEMA_hole_pitch(stepperT)/2,10]) cylinder(h=4,d1=3,d2=2); 
+      translate([-1-NEMA_hole_pitch(stepperT)/2, 9+NEMA_hole_pitch(stepperT)/2,10]) cylinder(h=4,d1=3,d2=2); 
+      translate([ 1+NEMA_hole_pitch(stepperT)/2, 9+NEMA_hole_pitch(stepperT)/2,10]) cylinder(h=4,d1=3,d2=2); 
+     
       difference() {
         hull() { 
           translate([0,0,-10]) cylinder(h=2,d=40);
@@ -97,7 +102,6 @@ module WPStepperMount () {
           translate([-20,-20,-12]) cube([40,40,10]);
         }
       }
-        
     }
     union() {   
       NEMA_screw_positions(stepperT, n=3) {
@@ -110,61 +114,140 @@ module WPStepperMount () {
         translate([0,0,-5]) cylinder(h=20,d=46);
         translate([0,0, 3]) cylinder(h=12,d=52);
       }
-      
-      transrot([-8-NEMA_hole_pitch(stepperT)/2,-8-NEMA_hole_pitch(stepperT)/2,-2],[0,0,45]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40);  
-      transrot([-8-NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40);
-      transrot([ 8+NEMA_hole_pitch(stepperT)/2, 8+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40);
-   
-      
-      
+
+      //Nut traps with inlays
+      if (inlay) {
+        transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,-5],[0,0,0]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+        transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,8-nut_thickness(M3_nut)-0.2],[0,0,-15]) cylinder(r=nut_radius(M3_nut)+0.2,h=nut_thickness(M3_nut)+0.2,$fn=6);
+
+        transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-5],[0,0,0]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+        transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,8-nut_thickness(M3_nut)-0.2],[0,0,-15]) cylinder(r=nut_radius(M3_nut)+0.2,h=nut_thickness(M3_nut)+0.2,$fn=6);
+
+        transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-5],[0,0,0]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+        transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,8-nut_thickness(M3_nut)-0.2],[0,0,-15]) cylinder(r=nut_radius(M3_nut)+0.2,h=nut_thickness(M3_nut)+0.2,$fn=6);
+      }
+      //Nut traps without inlays
+      else {
+        transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,-2],[0,0,45]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40,$fn=32);  
+        
+          hull() {
+          transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=10);   
+          transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,-3],[0,0,135]) linear_extrude(10) polygon([[-2,0],[2,0],[0,5]]);
+        }
+
+        transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40);
+        hull() {
+          transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=10);   
+          transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-3],[0,0,45]) linear_extrude(10) polygon([[-2,0],[2,0],[0,5]]);
+        }
+
+        transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=40);   
+        hull() {
+          transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-2],[0,0,-15]) nut_trap(M3_dome_screw, M3_nut,depth=10,h=10);   
+          transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,-3],[0,0,-45]) linear_extrude(10) polygon([[-2,0],[2,0],[0,5]]);
+        }
+      }
     }
   }
+  //Bridge to ease printing
+  if (!inlay) {
+    translate([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=0.15,d=8);
+    translate([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=0.15,d=8);
+    translate([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,8]) cylinder(h=0.15,d=8);
+  }
+
 }
 *WPStepperMount();
 
-
-module WPStepperMountLeft_stl() {
-  stl("WPStepperMountLeft");
+module WPStepperMountWithInlays_stl() {
+  stl("WPStepperMount");
   color(pp1_colour)
-  WPStepperMount();
+  WPStepperMount(inlay=true);
 }
 
-module WPStepperMountRight_stl() {
-  stl("WPStepperMountRight");
+module WPStepperMountWithoutInlays_stl() {
+  stl("WPStepperMountWithoutInlays");
   color(pp1_colour)
-  mirror([0,1,0]) WPStepperMount();
+  WPStepperMount(inlay=false);
+}
+
+//$vpt = [-10,0,-5];
+//$vpr = [60,0,160];
+//! TBD
+module WPStepperMountWithInlays_assembly() {
+  pose([-10,0,-5], [60,0,160])
+  assembly("WPStepperMountWithInlays", ngb = true) {
+   
+    //Stepper mount
+    difference() {        
+      WPStepperMountWithInlays_stl();
+      if (is_undef($explode) ? 0 : $explode) {
+        translate([-50,-50,7.99]) cube([100,100,100]);
+        //translate([-50,22,4.99]) cube([100,100,100]);
+      }  
+    }
+    
+    //Nuts
+    explode(10) transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+    explode(10) transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+    explode(10) transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+  } 
+}
+
+//! TBD
+module WPStepperMountWithoutInlays_assembly() {
+
+  //Stepper mount
+  WPStepperMountWithoutInlays_stl();
+
+  //Nuts
+  explode(-10) transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+  explode(-10) transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+  explode(-10) transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,7.9-nut_thickness(M3_nut)],[0,0,-15]) nut(M3_nut);
+}
+
+
+//! TBD
+module WPStepperMountLeft_assembly() {
+  pose([25,30,20], [80,0,180])
+  assembly("WPStepperMountLeft") {
+
+    //Stepper mount
+    WPStepperMountWithInlays_assembly();
+    //WPStepperMountWithoutInlays_assembly();
+
+    //Stepper
+    transrot([0,0,-8],[0,0,0])    NEMA_screws(stepperT, M3_pan_screw, n=3);   
+    transrot([0,0,-10],[0,0,180]) NEMA(stepperT, 0, true);
+  }
 }
 
 //! TBD
 module WPStepperMountRight_assembly() {
-  pose([25,30,20], [80,0,240])
-  assembly("WPStepperMountRight") {
+  pose([25,30,20], [80,0,180])
+  assembly("WPStepperMounRight") {
 
-    transrot([0,0,0],[0,0,0])   WPStepperMountRight_stl();
-    transrot([0,0,-8],[0,0,90]) NEMA_screws(stepperT, M3_pan_screw, n=3);   
-    transrot([0,0,-10],[0,0,0]) NEMA(stepperT, 0, true);
+    //Stepper mount
+    WPStepperMountWithInlays_assembly();
+    //WPStepperMountWithoutInlays_assembly();
 
-    *translate([-100,-100,10]) cube([200,200,2]);
-      
+    //Stepper
+    transrot([0,0,-8],[0,0,0])   NEMA_screws(stepperT, M3_pan_screw, n=3);   
+    transrot([0,0,-10],[0,0,270]) NEMA(stepperT, 0, true);
   }
 }
 
-//! TBD
-module WPStepperMountLeft_assembly() {
-    pose([25,30,20], [80,0,180])
-    assembly("WPStepperMountLeft") {
- 
-    transrot([0,0,0],[0,0,0])     WPStepperMountLeft_stl();
-    transrot([0,0,-8],[0,0,0])    NEMA_screws(stepperT, M3_pan_screw, n=3);   
-    transrot([0,0,-10],[0,0,180]) NEMA(stepperT, 0, true);
+//Screws
+module WPStepperMountScrews() {
 
-    *translate([-100,-100,10]) cube([200,200,2]);
-        
-    }
+  //Mount screws
+  transrot([-7-NEMA_hole_pitch(stepperT)/2,-7-NEMA_hole_pitch(stepperT)/2,11],[0,0,0]) screw_and_washer(M3_dome_screw,10);
+  transrot([-7-NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,11],[0,0,0]) screw_and_washer(M3_dome_screw,10);
+  transrot([ 7+NEMA_hole_pitch(stepperT)/2, 7+NEMA_hole_pitch(stepperT)/2,11],[0,0,0]) screw_and_washer(M3_dome_screw,10);
 }
 
 if($preview||true) {
-//   $explode = 1;
-   *WPStepperMountRight_assembly();
-   WPStepperMountLeft_assembly();
+   $explode = 0;
+   //WPStepperMountLeft_assembly();
+   WPStepperMountRight_assembly();
 }

@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Stepper Motor Shaft Assembly                                #
+//# WindowPainter - Stepper Motor Assembly                                       #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -22,51 +22,65 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   Stepper motor shaft assembly of the WindowPainter.                        #
+//#   Stepper motor clamp assembly of the WindowPainter.                        #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
-//#   January 21, 2023                                                          #
+//#   February 12, 2023                                                         #
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
 
 include <./WPConfig.scad>
 
-use <./WPPulley.scad>
-use <./WPAligner.scad>
+use <./WPStepperClamp.scad>
 use <./WPStepperMount.scad>
+use <./WPStepperShaft.scad>
+//use <./WPEndstop.scad>
 
 //Set view
 //$vpt = [25,30,20];
 //$vpr = [80,0,340];
 
-//! TBD
-module WPStepperShaftRight_assembly() {
-  pose([25,30,20], [80,0,240])
-  assembly("WPStepperShaftRight") {
 
-    transrot([0,0,0],  [0,0,0]) explode(50)             WPPulley_assembly();
-    transrot([0,0,0],  [0,0,stepperRightA]) explode(30) WPAlignerRight_assembly();
-    transrot([0,0,0],  [0,0,90])                        WPStepperMountRight_assembly();
-              
+//! TBD
+module WPStepperRight_assembly() {
+  pose([25,30,20], [80,0,240])
+  assembly("WPStepperClampRight") {
+    translate([winW,0,0]) {
+   
+      //Clamp
+      WPStepperClampRight_assembly();
+
+      //Stepper
+      explode([0,0,20]) transrot([stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftRight_assembly();
+      transrot([stepperOffsX,stepperOffsY,0],[180,0,180]) WPStepperMountScrews();
+    }   
   }
 }
 
 //! TBD
-module WPStepperShaftLeft_assembly() {
-    pose([25,30,20], [80,0,180])
-    assembly("WPStepperShaftLeft") {
+module WPStepperLeft_assembly() {
+  pose([25,30,20], [80,0,180])
+  assembly("WPStepperClampLeft") {
+    translate([0,0,0]) {
 
-      transrot([0,0,0],  [0,0,0])                explode(50) WPPulley_assembly();
-      transrot([0,0,0],  [0,0,270-stepperLeftA]) explode(30) WPAlignerLeft_assembly();
-      transrot([0,0,0],  [0,0,0])                WPStepperMountLeft_assembly();    
-        
-    }
+      //Clamp
+      WPStepperClampLeft_assembly();
+      
+      //Stepper
+      explode([0,0,20]) transrot([-stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftLeft_assembly();
+      transrot([-stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperMountScrews();
+      
+    }   
+  }
 }
 
 if($preview) {
-//  $explode = 1;
-   *WPStepperShaftRight_assembly();
-   WPStepperShaftLeft_assembly();
+   $explode = 0;
+   WPStepperRight_assembly();
+   WPStepperLeft_assembly();
+   
+   *translate([0,0,-44]) windowFrame(glassHeight=winH,
+                                    glassWidth=winW); 
 }

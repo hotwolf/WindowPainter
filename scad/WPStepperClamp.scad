@@ -34,7 +34,7 @@
 include <./WPConfig.scad>
 
 use <./WPClampScrew.scad>
-use <./WPStepperShaft.scad>
+//use <./WPStepperShaft.scad>
 
 //Set view
 //$vpt = [25,30,20];
@@ -82,9 +82,35 @@ module WPStepperClamp () {
     }
   }
   //Front
-  translate([-90,-61,-14]) cube([112,60,4]);
-  translate([-79,-22,-14]) cube([140,112,4]);
-      
+  difference() {
+    union() {
+      translate([-90,-61,-14]) cube([112,60,4]);
+      translate([-79,-22,-14]) cube([140,112,4]);
+    }
+    union() {
+       //Screw holes
+       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+
+       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+
+       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+ 
+       //Shaft hole 
+       translate([-stepperOffsX,stepperOffsY,-16]) cylinder(h=10,d=48);
+
+       //Fittings
+       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY-1-NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY+1+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+       translate([-stepperOffsX-1-NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+       translate([-stepperOffsX+1+NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+
+        
+    }
+  }
+        
   //Outside
   translate([-87,-61,-24]) cube([2,60,10]);
   for (y=[-5:-8:-64]) { 
@@ -118,26 +144,21 @@ module WPStepperClampRight_stl() {
 module WPStepperClampRight_assembly() {
   pose([25,30,20], [80,0,240])
   assembly("WPStepperClampRight") {
-    translate([winW,0,0]) {
-      //Printed part
-      transrot([0,0,0],[0,0,0]) WPStepperClampRight_stl();
+    //Printed part
+    transrot([0,0,0],[0,0,0]) WPStepperClampRight_stl();
       
-      //Clamp screws
-      explode([0,0,-20]) transrot([-45,-16,-24],[90,30,0]) nut(M5_nut);  
-      transrot([-45,-22-8,-24],[90,0,0]) {
-        explode(45)  screw(M5_hex_screw, 20);
-        explode(55)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
-      }       
-      transrot([-20,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
-      transrot([-22-8,-45,-24],[0,270,0]) {
-        explode(20)   screw(M5_hex_screw, 20);
-        explode(30)   WPClampScrewGrip_stl(); 
-        explode(-10)  WPClampScrewShoe_stl();
-      }
-       
-      //Stepper    
-      explode([0,0,20]) transrot([stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftRight_assembly();
+    //Clamp screws
+    explode([0,0,-20]) transrot([-45,-16,-24],[90,30,0]) nut(M5_nut);  
+    transrot([-45,-22-8,-24],[90,0,0]) {
+      explode(45)  screw(M5_hex_screw, 20);
+      explode(55)  WPClampScrewGrip_stl(); 
+      explode(-10) WPClampScrewShoe_stl();
+    }       
+    transrot([-20,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
+    transrot([-22-8,-45,-24],[0,270,0]) {
+      explode(20)   screw(M5_hex_screw, 20);
+      explode(30)   WPClampScrewGrip_stl(); 
+      explode(-10)  WPClampScrewShoe_stl();
     }
   }
 }
@@ -146,27 +167,21 @@ module WPStepperClampRight_assembly() {
 module WPStepperClampLeft_assembly() {
   pose([25,30,20], [80,0,180])
   assembly("WPStepperClampLeft") {
-    translate([0,0,0]) {
-      //Printed part
-      transrot([0,0,0],[0,0,0])   WPStepperClampLeft_stl();
+    //Printed part
+    transrot([0,0,0],[0,0,0])   WPStepperClampLeft_stl();
     
-      //Clamp screws
-      explode([0,0,-20]) transrot([45,-16,-24],[90,30,0]) nut(M5_nut);  
-      transrot([45,-22-8,-24],[90,0,0]) {
-        explode(45)  screw(M5_hex_screw, 20);
-        explode(55)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
-      }       
-      transrot([16,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
-      transrot([22+8,-45,-24],[0,90,0]) {
-        explode(20)  screw(M5_hex_screw, 20);
-        explode(30)  WPClampScrewGrip_stl(); 
-        explode(-10) WPClampScrewShoe_stl();
-      }
-       
-      //Stepper    
-      explode([0,0,20]) transrot([-stepperOffsX,stepperOffsY,0],[180,0,270])
-        WPStepperShaftLeft_assembly();
+    //Clamp screws
+    explode([0,0,-20]) transrot([45,-16,-24],[90,30,0]) nut(M5_nut);  
+    transrot([45,-22-8,-24],[90,0,0]) {
+      explode(45)  screw(M5_hex_screw, 20);
+      explode(55)  WPClampScrewGrip_stl(); 
+      explode(-10) WPClampScrewShoe_stl();
+    }       
+    transrot([16,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
+    transrot([22+8,-45,-24],[0,90,0]) {
+      explode(20)  screw(M5_hex_screw, 20);
+      explode(30)  WPClampScrewGrip_stl(); 
+      explode(-10) WPClampScrewShoe_stl();
     }
   }
 }
@@ -174,8 +189,5 @@ module WPStepperClampLeft_assembly() {
 if($preview) {
 //   $explode = 1;
    WPStepperClampRight_assembly();
-   WPStepperClampLeft_assembly();
-   
-   *translate([0,0,-44]) windowFrame(glassHeight=winH,
-                                    glassWidth=winW); 
+   *WPStepperClampLeft_assembly();
 }
