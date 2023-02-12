@@ -31,14 +31,14 @@
 //#                                                                             #
 //###############################################################################
 
-//include <NopSCADlib/global_defs.scad>
-include <NopSCADlib/lib.scad>
+//include <../lib/NopSCADlib/global_defs.scad>
+include <../lib/NopSCADlib/lib.scad>
 //include <NopSCADlib/core.scad>
-include <NopSCADlib/vitamins/screws.scad>
-include <NopSCADlib/vitamins/nuts.scad>
-include <NopSCADlib/vitamins/stepper_motors.scad>
-include <NopSCADlib/vitamins/microswitches.scad>
-include <NopSCADlib/utils/thread.scad>
+include <../lib/NopSCADlib/vitamins/screws.scad>
+include <../lib/NopSCADlib/vitamins/nuts.scad>
+include <../lib/NopSCADlib/vitamins/stepper_motors.scad>
+include <../lib/NopSCADlib/vitamins/microswitches.scad>
+include <../lib/NopSCADlib/utils/thread.scad>
 
 use <../vitamins/sg90.scad>
 use <../vitamins/pen.scad>
