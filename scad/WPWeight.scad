@@ -33,12 +33,69 @@
 
 include <./WPConfig.scad>
 
+use <./WPBeadedChain.scad>
+
 use <../printed/cylinderBearing.scad>
 use <../printed/beadedChainIdler.scad>
 
+
 //Set view
-$vpt = [-10,-60,15];
-$vpr = [330,-30,0];
+//$vpt = [-10,-60,15];
+//$vpr = [330,-30,0];
+
+//Beaded chain parts
+//==================
+//Left start bead
+module WPWeightLeftStartBead(offsX=-weightOffsX,
+                             offsY=-weightLeftY) {
+  bead(x=offsX-10,
+       y=offsY-16.5);                    
+}
+*WPWeightLeftStartBead(0,0);
+
+//Left end bead
+module WPWeightLeftEndBead(offsX=-weightOffsX,
+                           offsY=-weightLeftY) {
+  bead(x=offsX+10,
+       y=offsY-16.5);                    
+}
+*WPWeightLeftEndBead(0,0);
+
+//Left chain segment
+module WPWeightLeftChain(offsX=-weightOffsX,
+                         offsY=-weightLeftY) {
+
+  beadArc(x=offsX,
+          y=offsY-16.5,
+          d=20,a1=90,a2=270);
+}
+*WPWeightLeftChain(0,0);
+
+//Right start bead
+module WPWeightRightStartBead(offsX=winW+weightOffsX,
+                              offsY=-weightRightY) {
+  bead(x=offsX+10,
+       y=offsY-16.5);                    
+}
+*WPWeightRightStartBead(0,0);
+
+//Left end bead
+module WPWeightRightEndBead(offsX=winW+weightOffsX,
+                            offsY=-weightRightY) {
+  bead(x=offsX-10,
+       y=offsY-16.5);                    
+}
+*WPWeightRightEndBead(0,0);
+
+//Left chain segment
+module WPWeightRightChain(offsX=winW+weightOffsX,
+                          offsY=-weightRightY) {
+
+  beadArc(x=offsX,
+          y=offsY-16.5,
+          d=20,a1=90,a2=270);
+}
+*WPWeightRightChain(0,0);
 
 //Thread profile
 threadPitch   = 4;

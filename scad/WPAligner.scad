@@ -144,7 +144,7 @@ module WPAlignerRight_stl() {
   stl("WPAlignerRight");
   color(pp2_colour)
   difference() { 
-    WPAligner();
+    %WPAligner();
     union() {
       transrot([39,1,-7.8],[180,0,270])  linear_extrude(0.8)text("+4cm",size=6,halign="right",valign="bottom");
       transrot([52,-4,-7.8],[180,0,270]) linear_extrude(0.8)text("R",size=12,halign="left",valign="top");
@@ -156,7 +156,7 @@ module WPAlignerLeft_stl() {
   stl("WPAlignerLeft");
   color(pp2_colour)
   difference() {
-    mirror([0,1,0]) WPAligner();
+    %mirror([0,1,0]) WPAligner();
     union() {
       transrot([39,-1,-7.8],[180,0,270]) linear_extrude(0.8)text("+4cm",size=6,halign="left",valign="bottom");
       transrot([52,4,-7.8],[180,0,270])  linear_extrude(0.8)text("L",size=12,halign="right",valign="top");

@@ -52,14 +52,13 @@ module WPClampScrewShoe_stl() {
 
 //Just in case
 module WPClampScrew_assembly() {
-  pose([25,30,20], [80,0,240])
-//WPClampScrewShoe_stl();
-    assembly("WPClampScrew") {
+  //pose([25,30,20], [80,0,240])
+  //assembly("WPClampScrew") {
         
     explode(30)  WPClampScrewGrip_stl(); 
     explode(10)  WPClampScrewShoe_stl();
     explode(20)  screw(M5_hex_screw, 20);
-  }
+  //}
 }
  *WPClampScrew_assembly();
 

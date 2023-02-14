@@ -70,25 +70,29 @@ use <../scad/WPGondolaLifter.scad>
 winW   = 1000; //Window width
 winH   =  800; //Window height
 
+//Drawing
+drawingX = function (t)  winW/2+0.4*winW*cos(360*t);
+drawingY = function (t) -winH/2-0.4*winW*cos(360*t)*sin(360*t);
+
 //Gondola position (origin is the upper left window corner)
-gondolaX =  winW/2+0.4*winW*cos(360*$t);             //X coordiate of the gondola
-gondolaY = -winH/2-0.4*winW*cos(360*$t)*sin(360*$t); //Y coordinate of the gondola
-//gondolaX =  winW; //X coordiate of the gondola
+gondolaX = drawingX($t); //X coordiate of the gondola
+gondolaY = drawingY($t); //Y coordinate of the gondola
+//gondolaX =  0*winW; //X coordiate of the gondola
 //gondolaY = -winH; //Y coordinate of the gondola
 
-
 //Beaded chain
-bcBeadD = 3.2; //Bead diameter (+tolerance)
-bcBeadS = 4;   //Bead spacing (distance between center of beads)
-bcCordD = 1;   //Cord diameter
+bcBeadD = 3.2;     //Bead diameter (+tolerance)
+bcBeadS = 4;       //Bead spacing (distance between center of beads)
+bcCordD = 1;       //Cord diameter
+bcBeadC = "Gray"; //Bead color
 
 //Steppers
 stepperT      = NEMA17_40; //type of stepper motor
 stepperOffsX  = 50;        //X offset between the window corner and the stepper center
 stepperOffsY  = 50;        //Y offset between the window corner and the stepper center
 stepperS      = winW +2*stepperOffsX; //Distance between the stepper centers
-stepperLeftA  = atan((gondolaY+stepperOffsY)/(gondolaX+stepperOffsY));
-stepperRightA = atan((winW-gondolaY+stepperOffsY)/(gondolaX+stepperOffsY));
+stepperLeftA  = atan((gondolaY+stepperOffsY)/(gondolaX+stepperOffsX));
+stepperRightA = 90+atan((gondolaY+stepperOffsY)/(winW-gondolaX+stepperOffsX));
 //echo("stepperLeftA  = ", stepperLeftA); 
 //echo("stepperRightA = ", stepperRightA); 
 

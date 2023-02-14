@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Stepper Motor Clamp Assembly                                #
+//# WindowPainter - Controller Mount Assembly                                   #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -26,7 +26,7 @@
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
-//#   January 25, 2023                                                          #
+//#   February 12, 2023                                                         #
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
@@ -34,26 +34,99 @@
 include <./WPConfig.scad>
 
 use <./WPClampScrew.scad>
-//use <./WPStepperShaft.scad>
 
 //Set view
 //$vpt = [25,30,20];
 //$vpr = [80,0,340];
 
-module WPStepperClamp () {
+//Arduino MEGA 2560 * RAMPS 1.4
+MEGA2560 = ["MEGA2560", "Arduino MEGA 2560 + RAMPS 1.4", 
+            inch(4.0),        //Length
+            inch(2.1),        //Width
+            1.6,              //PCB thickness
+            0,                //Corner radius
+            3.3,              //Mounting hole diameter
+            0,                //Pad araound mounting holes
+            "Gray",           //PCB color
+            false,            //Component BOM
+            inch([            //Mounting holes 
+             [0.55,0.10], 
+             [0.60,2.00],
+             [2.60,0.30],
+             [2.60,1.40],
+             [3.50,2.00],
+             [3.80,0.10]
+            ]),
+            [[inch(2.0), inch(1.55), 0, "text", 90, 12, "Arduno MEGA 2560", "Liberation Mono:style=Bold"],
+             [inch(2.0), inch(1.05), 0, "text",  8,  8, "+", "Liberation Mono:style=Bold"],
+             [inch(2.0), inch(0.55), 0, "text", 50, 12, "RAMPS 1.4", "Liberation Mono:style=Bold"]],
+            [],[],
+            inch([
+             [-2.00, -1.05],
+             [-2.00,  1.05],
+             [ 1.80,  1.05],
+             [ 1.90,  0.95],
+             [ 1.90,  0.54],
+             [ 2.00,  0.44],
+             [ 2.00, -0.85],
+             [ 1.90, -0.95],
+             [ 1.90, -1.05]
+            ]),
+            M2p5_pan_screw
+           ];
+
+//Geeetech GT2560
+GT2560   = ["GT2560", "Geeetech GT2560", 
+            109,              //Length
+            78,               //Width
+            1.6,              //PCB thickness
+            0,                //Corner radius
+            4,                //Mounting hole diameter
+            0,                //Pad araound mounting holes
+            "Gray",           //PCB color
+            false,            //Component BOM
+            [                 //Mounting holes 
+             [3.5,3], 
+             [3.5,75],
+             [95.5,3],
+             [95.5,75]
+            ],
+            [[54.5, 39, 0, "text", 50, 12, "GT2560", "Liberation Mono:style=Bold"]],
+            [],[],[],
+            M2p5_pan_screw
+           ];
+
+//RapRapDiscount Smart Controller
+RRDSC    = ["RRDSC", "RapRapDiscount Smart Controller", 
+            150,              //Length
+            55,               //Width
+            1.6,              //PCB thickness
+            0,                //Corner radius
+            3,                //Mounting hole diameter
+            0,                //Pad araound mounting holes
+            "Gray",           //PCB color
+            false,            //Component BOM
+            [                 //Mounting holes 
+             [2.62,2.62], 
+             [2.62,52.38],
+             [147.38,2.62],
+             [147.38,52.38]
+            ],
+            [[75, 27.5, 0, "text", 140, 18, "RapRapDiscount Smart Controller", "Liberation Mono:style=Bold"]],
+            [],[],[],
+            M2p5_pan_screw
+           ];
+
+module WPControllerClamp () {
 
   //Inside
   difference() {
     union() {
-      translate([14,-61,-34]) cube([8,47,20]);
-      for(y=[-22,-37,-61]) {
-        hull() {  
-          translate([7,y,-14]) cube([15,8,4]);
-          translate([14,y,-34]) cube([8,8,20]);
-        }    
-      }
-      translate([14,-22,-34]) cube([47,8,20]);
-      for(x=[14,29,53]) {
+
+      for(x=[-75,39]) {
+        translate([x,-22,-34]) cube([36,8,20]);
+     }
+      for(x=[-75,-47,39,67]) {
         hull() {  
           translate([x,-22,-14]) cube([8,15,4]);
           translate([x,-22,-34]) cube([8,8,20]);
@@ -61,22 +134,15 @@ module WPStepperClamp () {
       }    
     }  
     union() {
-      transrot([45,-30,-24],[90,0,0]) hull()
-        screwClampShoe(type=M5_hex_screw,length=20);
-      transrot([45,-10,-24],[90,0,0]) cylinder(h=20,r=screw_clearance_radius(M5_hex_screw)); 
-      hull() {
-        for (z=[-24,-44]) {
-          transrot([45,-15.9,z],[90,30,0]) 
+      for (x=[57,-57]) {
+        transrot([x,-30,-24],[90,0,0]) hull()
+          screwClampShoe(type=M5_hex_screw,length=20);
+        transrot([x,-10,-24],[90,0,0]) cylinder(h=20,r=screw_clearance_radius(M5_hex_screw)); 
+        hull() {
+          for (z=[-24,-44]) {
+            transrot([x,-15.9,z],[90,30,0]) 
             cylinder(h=nut_trap_depth(M5_nut)+0.2,r=nut_radius(M5_nut)+0.2,$fn=6);
-        }
-      }
-      transrot([30,-45,-24],[0,90,0]) hull()
-        screwClampShoe(type=M5_hex_screw,length=20); 
-      transrot([10,-45,-24],[0,90,0]) cylinder(h=20,r=screw_clearance_radius(M5_hex_screw)); 
-      hull() {
-        for (z=[-24,-44]) {
-          transrot([15.9,-45,z],[0,90,0]) 
-            cylinder(h=nut_trap_depth(M5_nut)+0.2,r=nut_radius(M5_nut)+0.2,$fn=6);
+          }
         }
       }
     }
@@ -84,43 +150,32 @@ module WPStepperClamp () {
   //Front
   difference() {
     union() {
-      translate([-90,-61,-14]) cube([112,60,4]);
-      translate([-79,-22,-14]) cube([140,112,4]);
+      translate([-75,-22,-14]) cube([150,112,4]);
     }
     union() {
-       //Screw holes
-       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
-       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
-
-       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
-       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
-
-       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
-       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
- 
-       //Shaft hole 
-       translate([-stepperOffsX,stepperOffsY,-16]) cylinder(h=10,d=48);
-
-       //Fittings
-       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY-1-NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
-       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY+1+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
-       translate([-stepperOffsX-1-NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
-       translate([-stepperOffsX+1+NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+//       //Screw holes
+//       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+//       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+//
+//       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+//       translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+//
+//       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+//       translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+// 
+//       //Fittings
+//       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY-1-NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+//       translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY+1+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+//       translate([-stepperOffsX-1-NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
+//       translate([-stepperOffsX+1+NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
 
         
     }
   }
         
   //Outside
-  translate([-87,-61,-24]) cube([2,60,10]);
-  for (y=[-5:-8:-64]) { 
-    hull() {
-      translate([-90,y,-14]) cube([5,4,4]);
-      translate([-87,y,-24]) cube([2,4,10]);
-    }
-  }
-  translate([-79,85,-24]) cube([140,2,10]);
-  for (x=[-79:8:58]) { 
+  translate([-75,85,-24]) cube([150,2,10]);
+  for (x=[-75:9.125:75]) { 
     hull() {
       translate([x,85,-14]) cube([4,5,4]);
       translate([x,85,-24]) cube([4,2,10]);
@@ -128,66 +183,55 @@ module WPStepperClamp () {
   }     
 }
 
-module WPStepperClampLeft_stl() {
-  stl("WPStepperClampLeft");
+module WPControllerClamp_stl() {
+  stl("WPControllerClamp");
   color(pp1_colour)
-  WPStepperClamp();
-}
-
-module WPStepperClampRight_stl() {
-  stl("WPStepperClampRight");
-  color(pp1_colour)
-  mirror([1,0,0]) WPStepperClamp();
+  WPControllerClamp();
 }
 
 //! TBD
-module WPStepperClampRight_assembly() {
+module WPControllerClamp_assembly() {
   pose([25,30,20], [80,0,240])
-  assembly("WPStepperClampRight") {
+  assembly("WPControllerClamp") {
     //Printed part
-    transrot([0,0,0],[0,0,0]) WPStepperClampRight_stl();
+    transrot([0,0,0],[0,0,0]) WPControllerClamp_stl();
       
     //Clamp screws
-    explode([0,0,-20]) transrot([-45,-16,-24],[90,30,0]) nut(M5_nut);  
-    transrot([-45,-22-8,-24],[90,0,0]) {
-      explode(45)  screw(M5_hex_screw, 20);
-      explode(55)  WPClampScrewGrip_stl(); 
-      explode(-10) WPClampScrewShoe_stl();
-    }       
-    transrot([-20,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
-    transrot([-22-8,-45,-24],[0,270,0]) {
-      explode(20)   screw(M5_hex_screw, 20);
-      explode(30)   WPClampScrewGrip_stl(); 
-      explode(-10)  WPClampScrewShoe_stl();
+    for (x=[57,-57]) {
+      transrot([x,-22,-24],[90,0,0])WPClampScrew_assembly();
+      #explode([0,0,-20]) transrot([x,-16,-24],[90,30,0]) nut(M5_nut);  
     }
   }
 }
+
 
 //! TBD
-module WPStepperClampLeft_assembly() {
-  pose([25,30,20], [80,0,180])
-  assembly("WPStepperClampLeft") {
-    //Printed part
-    transrot([0,0,0],[0,0,0])   WPStepperClampLeft_stl();
-    
-    //Clamp screws
-    explode([0,0,-20]) transrot([45,-16,-24],[90,30,0]) nut(M5_nut);  
-    transrot([45,-22-8,-24],[90,0,0]) {
-      explode(45)  screw(M5_hex_screw, 20);
-      explode(55)  WPClampScrewGrip_stl(); 
-      explode(-10) WPClampScrewShoe_stl();
-    }       
-    transrot([16,-45,-24],[0,90,0]) explode([20,0,0]) nut(M5_nut);  
-    transrot([22+8,-45,-24],[0,90,0]) {
-      explode(20)  screw(M5_hex_screw, 20);
-      explode(30)  WPClampScrewGrip_stl(); 
-      explode(-10) WPClampScrewShoe_stl();
+module WPController_assembly() {
+  pose([25,30,20], [80,0,240])
+  assembly("WPController") {
+    //Clamp
+    WPControllerClamp_assembly();
+  
+    //RapRapDiscount Smart Controller
+    translate([0,-26,-14])
+    rotate([45,0,0]) 
+    translate([0,27.5,0]) {
+      pcb(RRDSC);
+      pcb_screw_positions(RRDSC) {
+         
+         translate([0,0,pcb_thickness(RRDSC)]) screw_and_washer(M3_dome_screw,20);
+          
+      } 
     }
+        
   }
 }
-
+  
 if($preview) {
 //   $explode = 1;
-   WPStepperClampRight_assembly();
-   *WPStepperClampLeft_assembly();
+   WPController_assembly();
+    
+//   transrot([0,0,0],[0,0,0]) pcb(MEGA2560); 
+     transrot([0,60,0],[0,0,0]) pcb(GT2560);
+     *transrot([0,-10,10],[45,0,0]) pcb(RRDSC);
 }

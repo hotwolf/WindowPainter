@@ -1,5 +1,5 @@
 //###############################################################################
-//# WindowPainter - Beaded Chain Pulley                                         #
+//# WindowPainter - Beaded Chain                                                #
 //###############################################################################
 //#    Copyright 2023 Dirk Heisswolf                                            #
 //#    This file is part of the WindowPainter project.                          #
@@ -33,55 +33,102 @@
 
 include <WPConfig.scad>
 
-use <../printed/beadedChainPulley.scad>
+use <./WPWeight.scad>
+use <./WPStepperShaft.scad>
 
 //Set view
-$vpt = [8,10,20];
-$vpr = [72,0,75];
+//$vpt = [8,10,20];
+//$vpr = [72,0,75];
 
-//Pulley for beaded chain
-module WPPulley_stl() {
-  stl("WPPulley");
-
-  color(pp2_colour)
-  difference() {
-    union() {
-      beadedChainPulley(bcBeadD = bcBeadD, //Bead diameter (+tolerance)
-                        bcBeadS = bcBeadS, //Bead spacing (distance between center of beads)
-                        bcCordD = bcCordD, //Cord diameter
-                        boreD   = 2,       //Bore diameter
-                        guideN  = 32,      //Number of beads on the chain guide
-                        outerD  = 45,      //Outter diameter
-                        guideW  = 6,       //Width of the chain guide 
-                        outerW  = 8);      //Outer width
-
-      translate([0,0,4]) cylinder(h=6,d=16);
-    }
-    union() {
-      transrot([0,0,7],[90,0,0]) cylinder(h=10,r=screw_clearance_radius(M3_pan_screw));
-      transrot([-0.1-nut_square_width(M3nS_thin_nut)/2,-4.1-nut_square_thickness(M3nS_thin_nut),6.9-nut_square_width(M3nS_thin_nut)/2],[0,0,0]) 
-        cube([nut_square_width(M3nS_thin_nut)+0.2,nut_square_thickness(M3nS_thin_nut)+0.2,10]);
-      difference() {
-        translate([0,0,3]) cylinder(d=5,h=20,center=true);
-        translate([0,-3,3]) cube([8,2,20],center=true);
-      }
-    }
-  } 
+//Single bead
+module bead(x=0,y=0) {
+  color(bcBeadC)
+  translate([x,y,0]) sphere(d=bcBeadD);
 }
+*bead();
 
-//! TBD
-module WPPulley_assembly() {
-  pose([8, 10, 20], [72,0,75])
-  assembly("WPPulley") {
+//Arc
+module beadArc(x=0,y=0,r=undef,d=20,a1=0,a2=360) {
+  r = r==undef ? d/2 : r;
+  color(bcBeadC)  
+  transrot([x,y,0],[0,0,a1+90])
+  rotate_extrude(angle=a2-a1) 
+  translate([r,0,0])  
+  circle(d=bcBeadD);
+}
+*beadArc(a1=30,a2=120,x=20);
 
-    WPPulley_stl();
-    transrot([0,-4,7],[90,0,0])  explode([0,15,0]) nut_square(M3nS_thin_nut);
-    transrot([0,-10,7],[90,0,0]) explode([0,0,15])screw(M3_pan_screw,8);
-    
+//Line
+module beadLine(x1=0,y1=0,x2=0,y2=0) {
+  color(bcBeadC)  
+  hull() {
+    bead(x=x1,y=y1);
+    bead(x=x2,y=y2);
   }
 }
 
+//Left chain
+module WPBeadedChainLeft() {
+  vitamin("WPBeadedChainLeft: Beaded chain (diameter=3mm, spacing=4mm)");
+  color(bcBeadC)    
+  union() {
+    //Fastener to weight
+    hull() {  
+      bead(x=-weightOffsX-10,
+           y=weightOffsY);
+      WPWeightLeftStartBead();
+    }  
+    //Weight
+    WPWeightLeftChain();
+    //Weight to pulley  
+    hull() {  
+      WPWeightLeftEndBead();
+      WPStepperShaftLeftStartBead();
+    }
+    //Pulley to aligner 
+    WPStepperShaftLeftChain();   
+    //Aligner to gondola
+    hull() {  
+      WPStepperShaftLeftEndBead();
+      bead(x=gondolaX,
+           y=gondolaY);
+    } 
+  }    
+}
+ 
+//Right chain
+module WPBeadedChainRight() {
+  vitamin("WPBeadedChainRight: Beaded chain (diameter=3mm, spacing=4mm)");
+  color(bcBeadC)    
+  union() {
+    //Fastener to weight
+    hull() {  
+      bead(x=winW+weightOffsX+10,
+           y=weightOffsY);
+      WPWeightRightStartBead();
+    }  
+    //Weight
+    WPWeightRightChain();
+    //Weight to pulley  
+    hull() {  
+      WPWeightRightEndBead();
+      WPStepperShaftRightStartBead();
+    }
+    //Pulley to aligner 
+    WPStepperShaftRightChain();   
+    //Aligner to gondola
+    hull() {  
+      WPStepperShaftRightEndBead();
+      bead(x=gondolaX,
+           y=gondolaY);
+    } 
+  }    
+}
+ 
+
+
 if($preview) {   
    $explode = 1;
-   WPPulley_assembly();
+   WPBeadedChainLeft();
+   WPBeadedChainRight();
 }

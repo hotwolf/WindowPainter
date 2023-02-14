@@ -36,6 +36,8 @@ include <./WPConfig.scad>
 use <../scad/WPStepper.scad>
 use <../scad/WPGondolaPen.scad>
 use <../scad/WPWeight.scad>
+use <../scad/WPController.scad>
+use <../scad/WPBeadedChain.scad>
 
 //Set view
 //$vpt = [25,30,20];
@@ -64,9 +66,18 @@ module main_assembly() {
       //Right weight
       translate([winW+weightOffsX,-weightRightY,0]) WPWeight_assembly();
 
+      //Controller
+      translate([winW/2,0,0]) WPController_assembly();
+
+      //Beaded chains
+      WPBeadedChainLeft();
+      WPBeadedChainRight();
+
       //Window frame
       translate([0,0,-44]) windowFrame(glassHeight=winH,
-                                       glassWidth=winW); 
+                                       glassWidth=winW,
+                                       drawingXF=drawingX,
+                                       drawingYF=drawingY); 
     }
 }
 

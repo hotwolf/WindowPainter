@@ -41,7 +41,10 @@ module windowFrame(xOffset=0,
                    frameWidth=85,
                    frameInnerDepth=30,
                    frameOuterDepth=15,
-                   opens="right") {
+                   opens="right",
+                   drawingXF=undef,
+                   drawingYF=undef
+                   ) {
 
   //Constants
   glassDepth = 10;
@@ -90,6 +93,21 @@ module windowFrame(xOffset=0,
       translate([glassWidth+50,-glassHeight/2,55+frameInnerDepth]) sphere(d=20);
       translate([glassWidth+50,-glassHeight/2,55+frameInnerDepth]) rotate([90,0,0]) cylinder(h=120,d=20);
     }
+    
+    //Drawing
+    if (!is_undef(drawingXF) && !is_undef(drawingYF)) {
+      color("Green")
+      linear_extrude(0.1)
+      union() {
+        step=0.01;
+        for (i=[step:step:1]) {
+          hull() {
+            translate([drawingXF(i),drawingYF(i),0]) circle(5);
+            translate([drawingXF(i-step),drawingYF(i-step),0]) circle(5);
+          }
+        }
+      }   
+    }       
   }
 }
 
