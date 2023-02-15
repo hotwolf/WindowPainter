@@ -35,6 +35,7 @@ include <WPConfig.scad>
 
 use <./WPWeight.scad>
 use <./WPStepperShaft.scad>
+use <./WPStepperEndstop.scad>
 
 //Set view
 //$vpt = [8,10,20];
@@ -74,8 +75,9 @@ module WPBeadedChainLeft() {
   union() {
     //Fastener to weight
     hull() {  
-      bead(x=-weightOffsX-10,
-           y=weightOffsY);
+      *bead(x=-weightOffsX-10,
+            y=-weightOffsY);
+      WPStepperEndstopLeftEndBead();
       WPWeightLeftStartBead();
     }  
     //Weight
@@ -103,8 +105,9 @@ module WPBeadedChainRight() {
   union() {
     //Fastener to weight
     hull() {  
-      bead(x=winW+weightOffsX+10,
-           y=weightOffsY);
+      *bead(x=winW+weightOffsX+10,
+            y=-weightOffsY);
+      WPStepperEndstopRightEndBead();
       WPWeightRightStartBead();
     }  
     //Weight

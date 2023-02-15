@@ -36,7 +36,7 @@ include <./WPConfig.scad>
 use <./WPStepperClamp.scad>
 use <./WPStepperMount.scad>
 use <./WPStepperShaft.scad>
-//use <./WPEndstop.scad>
+use <./WPStepperEndstop.scad>
 
 //Set view
 //$vpt = [25,30,20];
@@ -55,6 +55,10 @@ module WPStepperRight_assembly() {
       //Stepper
       explode([0,0,20]) transrot([stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftRight_assembly();
       transrot([stepperOffsX,stepperOffsY,0],[180,0,180]) WPStepperMountScrews();
+     
+      //EndStop  
+      translate([weightOffsX,-weightOffsY,0]) WPStepperEndstopRight_assembly();
+      translate([weightOffsX,-weightOffsY,0]) WPStepperEndstopScrewsRight();
     }   
   }
 }
@@ -72,14 +76,17 @@ module WPStepperLeft_assembly() {
       explode([0,0,20]) transrot([-stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperShaftLeft_assembly();
       transrot([-stepperOffsX,stepperOffsY,0],[180,0,270]) WPStepperMountScrews();
       
-    }   
+      //EndStop  
+      translate([-weightOffsX,-weightOffsY,0]) WPStepperEndstopLeft_assembly();
+      translate([weightOffsX,-weightOffsY,0]) WPStepperEndstopScrewsLeft();
+   }   
   }
 }
 
 if($preview) {
    $explode = 0;
    WPStepperRight_assembly();
-   WPStepperLeft_assembly();
+   *WPStepperLeft_assembly();
    
    *translate([0,0,-44]) windowFrame(glassHeight=winH,
                                     glassWidth=winW); 

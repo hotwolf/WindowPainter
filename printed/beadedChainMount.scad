@@ -33,64 +33,63 @@
 
 include <NopSCADlib/lib.scad>
 
-module beadedChainMount(bcBeadD    = 3.2,   //Bead diameter (+tolerance)
-                        bcBeadS    = 4,     //Bead spacing (distance between center of beads)
-                        bcCordD    = 1,     //Cord diameter
-                        bcOpeningD = 2.8,   //Cord diameter
-                        lengthC    = 4,     //Number of beads to trap
-                        flip       = false) //Change the side of the excess openinh
-{			 
-  mirror([0,flip?1:0,0])
-  difference() {
-    union() {
-      hull() {
-        translate([-0.5,0,0])             sphere(d=bcBeadD+2);    
-        translate([-lengthC*bcBeadS,0,0]) sphere(d=bcBeadD+2);    
-        translate([-0.5,0,-bcBeadS])             sphere(d=bcBeadD+2);    
-        translate([-lengthC*bcBeadS,0,-bcBeadS]) sphere(d=bcBeadD+2);    
-      }
-        
-        
-    }
-    union() {
-      //Bead holes 
-      rotate([0,-45,0]) cylinder(h=20,d=bcOpeningD);                    
-      sphere(d=bcBeadD);  
-      for (i=[bcBeadS:bcBeadS:(lengthC-1)*bcBeadS]) {
-        translate([-i,0,0]) {
-        cylinder(h=20,d=bcOpeningD);                    
-        sphere(d=bcBeadD);  
-      } 
-    }
-
-    //Cord slot
-    translate([bcBeadS,0,0]) rotate([0,270,0]) cylinder(h=lengthC*bcBeadS,d=bcCordD);
-    translate([-(lengthC-1)*bcBeadS,-bcCordD/2,0]) cube([lengthC*bcBeadS,bcCordD,bcBeadS]);
-
-    //Top plane
-    translate([-(lengthC+1)*bcBeadS,-bcBeadD,bcBeadD/2]) cube([(lengthC+2)*bcBeadS,2*bcBeadS,bcBeadS]);
-
-    //Bottom plane
-    translate([-(lengthC+1)*bcBeadS,-bcBeadD,-0.5-2*bcBeadS-bcBeadD/2]) cube([(lengthC+2)*bcBeadS,2*bcBeadS,2*bcBeadS]);
+//Bead cut out
+module bcCutout(bcBeadD    = 3.2,   //Bead diameter (+tolerance)
+                bcOpeningD = 2.6,   //Hole opening
+                bcOpeningH = 20)    //Hole height
+{
+  bcOpeningD  = min(bcBeadD, bcOpeningD);
+  openingOffs = sqrt(bcBeadD^2 - bcOpeningD^2);  
     
-    //Opening foe excess chain
-    translate([-(lengthC-1)*bcBeadS,bcBeadS,0]) rotate([0,0,180]) rotate_extrude(angle=90) {
-      hull() {  
-        translate([bcBeadS,0,0]) circle(d=bcBeadD);
-        translate([bcBeadS,bcBeadS,0]) circle(d=bcBeadD);
-      }
-    }
-    translate([-(lengthC-1)*bcBeadS,0,0]) cylinder(h=bcBeadS,d=bcBeadD);
-    
-    //Debug
-    *translate([-30,0,-5]) cube([40,8,20]);
-    }
-  }   
+  union() {  
+    translate([0,0,0])             sphere(d=bcBeadD);
+    translate([0,0,openingOffs])   sphere(d=bcBeadD);
+    translate([0,0,0])             cylinder(h=bcBeadD/2,d=bcOpeningD);
+    translate([0,0,openingOffs])   cylinder(h=max(bcBeadD/2,bcOpeningH-openingOffs),d=bcBeadD);
+  }
 }
+*bcCutout();
+
+module bcCutoutLine(bcBeadD    = 3.2,  //Bead diameter (+tolerance)
+                    bcBeadS    = 4,     //Bead spacing (distance between center of beads)
+                    bcCordD    = 1,     //Cord diameter
+                    bcOpeningD = 2.8,  //Hole opening
+                    bcOpeningH = 20,   //Hole height
+                    bcC        = 4)    //Bead count
+{
+  union() {  
+    for (i=[0:bcBeadS:(bcC-1)*bcBeadS]) {
+      //Beads
+      translate([-i,0,0]) 
+      bcCutout(bcBeadD    = bcBeadD,      //Bead diameter (+tolerance)
+               bcOpeningD = bcOpeningD,   //Hole opening
+               bcOpeningH = bcOpeningH);  //Hole height
+    }
+    //Chain
+    translate([0.5*bcBeadS,0,0]) rotate([0,270,0]) cylinder(h=bcC*bcBeadS,d=bcCordD);    
+    translate([-(bcC-0.5)*bcBeadS,-bcCordD/2,0]) cube([bcC*bcBeadS,bcCordD,bcOpeningH]);    
+  }
+}
+*bcCutoutLine();
+
+module bcCutoutEscape(bcBeadD    = 3.2,  //Bead diameter (+tolerance)
+                      bcOpeningH = 20,   //Hole height
+                      bcEscapeR  = 5,    //Escape radius
+                      bcLeft     = true) //Escape to the left
+{
+  translate([0,bcLeft?-bcEscapeR:bcEscapeR,0])
+  rotate([0,0,bcLeft?90:180])
+  rotate_extrude(angle=90) {
+    union() {
+      translate([bcEscapeR,,00]) circle(d=bcBeadD);
+      translate([bcEscapeR-bcBeadD/2,0,0]) square([bcBeadD,bcOpeningH]);
+    }
+  }
+}
+*bcCutoutEscape();
 
 if ($preview) {
-    
-  //Beaded chain mount
-  beadedChainMount(flip=false);
+
+ bcCutoutLine();
     
 }

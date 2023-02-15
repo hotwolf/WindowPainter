@@ -98,7 +98,7 @@ stepperRightA = 90+atan((gondolaY+stepperOffsY)/(winW-gondolaX+stepperOffsX));
 
 //Weights
 weightOffsX    = stepperOffsX+10+64/PI;
-weightOffsY    = 60; //Endstop Y offset (relative to the window corner)
+weightOffsY    = 61; //Endstop Y offset (relative to the window corner)
 weightMaxLiftS = sqrt(pow(winW+stepperOffsX,2)+pow(winH+stepperOffsY,2));
 weightLeftY    = weightOffsY+(weightMaxLiftS-sqrt(pow(gondolaX+stepperOffsX,2)+pow(gondolaY-stepperOffsY,2)))/2;
 weightRightY   = weightOffsY+(weightMaxLiftS-sqrt(pow(winW-gondolaX+stepperOffsX,2)+pow(gondolaY-stepperOffsY,2)))/2;

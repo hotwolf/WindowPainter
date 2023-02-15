@@ -88,7 +88,7 @@ module WPStepperClamp () {
       translate([-79,-22,-14]) cube([140,112,4]);
     }
     union() {
-       //Screw holes
+       //Stepper mount screw holes
        translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
        translate([-stepperOffsX-7-NEMA_hole_pitch(stepperT)/2,stepperOffsY-7-NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
 
@@ -98,15 +98,28 @@ module WPStepperClamp () {
        translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
        translate([-stepperOffsX+7+NEMA_hole_pitch(stepperT)/2,stepperOffsY+7+NEMA_hole_pitch(stepperT)/2,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
  
-       //Shaft hole 
+       //Stepper mount shaft hole 
        translate([-stepperOffsX,stepperOffsY,-16]) cylinder(h=10,d=48);
 
-       //Fittings
+       //Stepper mount fittings
        translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY-1-NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
        translate([-stepperOffsX-9-NEMA_hole_pitch(stepperT)/2,stepperOffsY+1+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
        translate([-stepperOffsX-1-NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
        translate([-stepperOffsX+1+NEMA_hole_pitch(stepperT)/2,stepperOffsY+9+NEMA_hole_pitch(stepperT)/2,-16]) cylinder(h=8,d1=1.7,d2=3.7); 
 
+       //End stop mount screw holes
+       translate([-weightOffsX+0.1,-weightOffsY+15,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+       translate([-weightOffsX+0.1,-weightOffsY+15,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+
+       translate([-weightOffsX+6.4,-weightOffsY+8,-20]) cylinder(r=screw_clearance_radius(M3_dome_screw),h=20);
+       translate([-weightOffsX+6.4,-weightOffsY+8,-21]) cylinder(d=screw_boss_diameter(M3_dome_screw),h=10);
+
+//      transrot([-4.7,15,-16],[0,0,0]) 
+//     cylinder(h=12,r=screw_clearance_radius(M3_dome_screw)); 
+// 
+//     transrot([6.4,8,-9],[0,0,0]) 
+//     cylinder(h=3,r=nut_trap_radius(M3_nut,horizontal=true)+0.2,$fn=6); 
+       
         
     }
   }
