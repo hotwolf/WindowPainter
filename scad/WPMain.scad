@@ -30,6 +30,8 @@
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
+//! ![WindowPainter](img/wp.gif?raw=true)
+//! 
 //! WindowPainter is a project to recycle old 3D printers.
 //! It's a vertical plotter, to be be mounted on a window frame.
 //! 
@@ -47,7 +49,7 @@
 //! | &#10060; | Build a prototype |
 //! | &#10060; | Refine the design |
 //! | &#10060; | Setup a project web site |
-//! | &#10060; | Render an animated title picture |
+//! | &#9989;  | Render an animated title picture |
 //! | &#10060; | Configure/customize the Marlin firmware |
 //! | &#10060; | Plot the first image |
 
@@ -60,8 +62,9 @@ use <../scad/WPController.scad>
 use <../scad/WPBeadedChain.scad>
 
 //Set view
-//$vpt = [25,30,20];
-//$vpr = [80,0,340];
+//$vpt = [500,-400,-1.5];
+//$vpr = [10,30,0];
+//$vpd = 3500;
 
 //! A vertical plotter  . 
 // ![inside](doc/DIYLB.gif?raw=true)

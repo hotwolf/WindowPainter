@@ -1,5 +1,7 @@
 <a name="TOP"></a>
 # WindowPainter
+![WindowPainter](img/wp.gif?raw=true)
+
 WindowPainter is a project to recycle old 3D printers.
 It's a vertical plotter, to be be mounted on a window frame.
 
@@ -17,11 +19,9 @@ This project is still work in progress. Here is my todo list:
 | &#10060; | Build a prototype |
 | &#10060; | Refine the design |
 | &#10060; | Setup a project web site |
-| &#10060; | Render an animated title picture |
+| &#9989;  | Render an animated title picture |
 | &#10060; | Configure/customize the Marlin firmware |
 | &#10060; | Plot the first image |
-
-![Main Assembly](assemblies/main_assembled.png)
 
 <span></span>
 

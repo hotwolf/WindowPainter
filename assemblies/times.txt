@@ -29,7 +29,7 @@
     "assemblies/WPControllerClamp_assembly.png": 3.999,
     "assemblies/WPController_assembled.png": 4.156,
     "assemblies/WPController_assembly.png": 3.983,
-    "assemblies/main_assembled.png": 12.135,
-    "assemblies/main_assembly.png": 11.969,
-    "readme.html": 0.397
+    "assemblies/main_assembled.png": 11.043,
+    "assemblies/main_assembly.png": 11.189,
+    "readme.html": 0.39
 }
