@@ -1,0 +1,18 @@
+WPStepperClampLeft_assemblies:
+Vitamins:
+  2 Nut M3 x 2.4mm 
+  2 Nut M5 x 4mm 
+  3 Screw M3 dome x 10mm
+  2 Screw M3 dome x  8mm
+  2 Screw M5 hex x 20mm
+  5 Washer  M3 x 7mm x 0.5mm
+
+Printed:
+  2 WPClampScrewGrip.stl
+  2 WPClampScrewShoe.stl
+  1 WPStepperClampLeft.stl
+
+Assemblies:
+  1 WPStepperClampLeft_assembly
+  1 WPStepperEndstopLeft_assembly
+  1 WPStepperShaftLeft_assembly

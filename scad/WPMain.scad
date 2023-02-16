@@ -30,6 +30,26 @@
 //#      - Initial release                                                      #
 //#                                                                             #
 //###############################################################################
+//! WindowPainter is a project to recycle old 3D printers.
+//! It's a vertical plotter, to be be mounted on a window frame.
+//! 
+//! This project is still work in progress. Here is my todo list:
+//! 
+//! | Status | Task  |
+//! |:---|:---|
+//! | &#9989; | Setup the project |
+//! | &#9989; | Start the design |
+//! | &#9989; | Run the NopSCADlib flow |
+//! | &#10060; | Complete an initial version of the design |
+//! | &#10060; | Add assembly descriptions |
+//! | &#10060; | Simplify the BOM |
+//! | &#10060; | Finalize the build instructions |
+//! | &#10060; | Build a prototype |
+//! | &#10060; | Refine the design |
+//! | &#10060; | Setup a project web site |
+//! | &#10060; | Render an animated title picture |
+//! | &#10060; | Configure/customize the Marlin firmware |
+//! | &#10060; | Plot the first image |
 
 include <./WPConfig.scad>
 
@@ -43,8 +63,8 @@ use <../scad/WPBeadedChain.scad>
 //$vpt = [25,30,20];
 //$vpr = [80,0,340];
 
-//! A vertical plotter absed on therv . 
-//! ![inside](doc/DIYLB.gif?raw=true)
+//! A vertical plotter  . 
+// ![inside](doc/DIYLB.gif?raw=true)
 
 //! Finished!
 module main_assembly() {

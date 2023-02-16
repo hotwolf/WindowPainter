@@ -1,0 +1,6 @@
+WPStepperShaftLeft_assembly:
+
+Assemblies:
+  1 WPAlignerLeft_assembly
+  1 WPPulley_assembly
+  1 WPStepperMountLeft_assembly

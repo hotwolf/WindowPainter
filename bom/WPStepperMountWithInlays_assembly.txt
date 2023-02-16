@@ -1,0 +1,6 @@
+WPStepperMountWithInlays_assemblies:
+Vitamins:
+  6 Nut M3 x 2.4mm 
+
+Printed:
+  2 WPStepperMountWithInlays.stl

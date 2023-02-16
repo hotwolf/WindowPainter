@@ -1,0 +1,9 @@
+WPControllerClamp_assembly:
+Vitamins:
+  2 Nut M5 x 4mm 
+  2 Screw M5 hex x 20mm
+
+Printed:
+  2 WPClampScrewGrip.stl
+  2 WPClampScrewShoe.stl
+  1 WPControllerClamp.stl

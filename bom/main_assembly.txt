@@ -1,0 +1,11 @@
+main_assembly:
+Vitamins:
+  1 Beaded chain (diameter=3mm, spacing=4mm)
+  1 Beaded chain (diameter=3mm, spacing=4mm)
+
+Assemblies:
+  1 WPController_assembly
+  1 WPGondolaPenBearings_assembly
+  1 WPStepperClampLeft_assembly
+  1 WPStepperClampRight_assembly
+  2 WPWeight_assemblies

@@ -1,0 +1,4 @@
+WPAlignerLeft_assembly:
+Printed:
+  2 WPAlignerIdler.stl
+  1 WPAlignerLeft.stl

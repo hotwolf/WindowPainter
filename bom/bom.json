@@ -1,0 +1,456 @@
+[
+    {
+        "name": "WPControllerClamp_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {},
+        "vitamins": {
+            "screw(M5_hex_screw, 20): Screw M5 hex x 20mm": {
+                "count": 2
+            },
+            "nut(M5_nut): Nut M5 x 4mm ": {
+                "count": 2
+            }
+        },
+        "printed": {
+            "WPControllerClamp.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewGrip.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewShoe.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPController_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPControllerClamp_assembly": 1
+        },
+        "vitamins": {
+            "pcb(RRDSC): RapRapDiscount Smart Controller": {
+                "count": 1
+            },
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 4
+            },
+            "screw(M3_dome_screw, 20): Screw M3 dome x 20mm": {
+                "count": 4
+            }
+        },
+        "printed": {},
+        "routed": {}
+    },
+    {
+        "name": "WPWeight_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {},
+        "vitamins": {
+            "nut(M3_nut): Nut M3 x 2.4mm ": {
+                "count": 2
+            },
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 2
+            },
+            "screw(M3_dome_screw, 20): Screw M3 dome x 20mm": {
+                "count": 2
+            }
+        },
+        "printed": {
+            "WPWeightTop.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPWeightIdler.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPWeightBottom.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPGondolaPenClampD20_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {},
+        "vitamins": {},
+        "printed": {
+            "WPGondolaPenClampD30Part1.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPGondolaPenClampD30Part2.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPGondolaPenClampD30Part3.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPGondolaPenClampD30Part4.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPGondolaPenBearings_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPGondolaPenClampD20_assembly": 2
+        },
+        "vitamins": {},
+        "printed": {
+            "WPGondolaPenBearingLeft.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPGondolaPenBearingRight.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperEndstopLeft_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {},
+        "vitamins": {
+            "microswitch(medium_microswitch): Microswitch SS-01 or SS-5GL": {
+                "count": 2
+            },
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 4
+            },
+            "screw(M3_dome_screw, 12): Screw M3 dome x 12mm": {
+                "count": 4
+            },
+            "nut(M3_nut): Nut M3 x 2.4mm ": {
+                "count": 4
+            }
+        },
+        "printed": {
+            "WPStepperEndstopLeft.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPStepperEndstopRight.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperMountWithInlays_assembly",
+        "big": null,
+        "ngb": true,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {},
+        "vitamins": {
+            "nut(M3_nut): Nut M3 x 2.4mm ": {
+                "count": 6
+            }
+        },
+        "printed": {
+            "WPStepperMountWithInlays.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperMounRight_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPStepperMountWithInlays_assembly": 1
+        },
+        "vitamins": {
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 3
+            },
+            "star_washer(M3_washer): Washer star M3 x 0.5mm": {
+                "count": 3
+            },
+            "screw(M3_pan_screw, 8): Screw M3 pan x  8mm": {
+                "count": 3
+            },
+            "NEMA(NEMA17_40): Stepper motor NEMA17 x 40mm": {
+                "count": 1
+            }
+        },
+        "printed": {},
+        "routed": {}
+    },
+    {
+        "name": "WPAlignerRight_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {},
+        "vitamins": {},
+        "printed": {
+            "WPAlignerRight.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPAlignerIdler.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPPulley_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {},
+        "vitamins": {
+            "nut(M3nS_thin_nut): Nut M3nS 5.5 x 1.8mm ": {
+                "count": 2
+            },
+            "screw(M3_pan_screw, 8): Screw M3 pan x  8mm": {
+                "count": 2
+            }
+        },
+        "printed": {
+            "WPPulley.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperShaftRight_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPPulley_assembly": 1,
+            "WPAlignerRight_assembly": 1,
+            "WPStepperMounRight_assembly": 1
+        },
+        "vitamins": {},
+        "printed": {},
+        "routed": {}
+    },
+    {
+        "name": "WPStepperClampRight_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {
+            "WPStepperClampRight_assembly": 1,
+            "WPStepperShaftRight_assembly": 1,
+            "WPStepperEndstopLeft_assembly": 1
+        },
+        "vitamins": {
+            "nut(M5_nut): Nut M5 x 4mm ": {
+                "count": 2
+            },
+            "screw(M5_hex_screw, 20): Screw M5 hex x 20mm": {
+                "count": 2
+            },
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 5
+            },
+            "screw(M3_dome_screw, 10): Screw M3 dome x 10mm": {
+                "count": 3
+            },
+            "screw(M3_dome_screw, 8): Screw M3 dome x  8mm": {
+                "count": 2
+            },
+            "nut(M3_nut): Nut M3 x 2.4mm ": {
+                "count": 2
+            }
+        },
+        "printed": {
+            "WPStepperClampRight.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewGrip.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewShoe.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperMountLeft_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPStepperMountWithInlays_assembly": 1
+        },
+        "vitamins": {
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 3
+            },
+            "star_washer(M3_washer): Washer star M3 x 0.5mm": {
+                "count": 3
+            },
+            "screw(M3_pan_screw, 8): Screw M3 pan x  8mm": {
+                "count": 3
+            },
+            "NEMA(NEMA17_40): Stepper motor NEMA17 x 40mm": {
+                "count": 1
+            }
+        },
+        "printed": {},
+        "routed": {}
+    },
+    {
+        "name": "WPAlignerLeft_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {},
+        "vitamins": {},
+        "printed": {
+            "WPAlignerLeft.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPAlignerIdler.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPStepperShaftLeft_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPPulley_assembly": 1,
+            "WPAlignerLeft_assembly": 1,
+            "WPStepperMountLeft_assembly": 1
+        },
+        "vitamins": {},
+        "printed": {},
+        "routed": {}
+    },
+    {
+        "name": "WPStepperClampLeft_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 2,
+        "assemblies": {
+            "WPStepperClampLeft_assembly": 1,
+            "WPStepperShaftLeft_assembly": 1,
+            "WPStepperEndstopLeft_assembly": 1
+        },
+        "vitamins": {
+            "nut(M5_nut): Nut M5 x 4mm ": {
+                "count": 2
+            },
+            "screw(M5_hex_screw, 20): Screw M5 hex x 20mm": {
+                "count": 2
+            },
+            "washer(M3_washer): Washer  M3 x 7mm x 0.5mm": {
+                "count": 5
+            },
+            "screw(M3_dome_screw, 10): Screw M3 dome x 10mm": {
+                "count": 3
+            },
+            "screw(M3_dome_screw, 8): Screw M3 dome x  8mm": {
+                "count": 2
+            },
+            "nut(M3_nut): Nut M3 x 2.4mm ": {
+                "count": 2
+            }
+        },
+        "printed": {
+            "WPStepperClampLeft.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewGrip.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPClampScrewShoe.stl": {
+                "count": 2,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "main_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPStepperClampLeft_assembly": 1,
+            "WPStepperClampRight_assembly": 1,
+            "WPGondolaPenBearings_assembly": 1,
+            "WPWeight_assembly": 2,
+            "WPController_assembly": 1
+        },
+        "vitamins": {
+            "WPBeadedChainLeft: Beaded chain (diameter=3mm, spacing=4mm)": {
+                "count": 1
+            },
+            "WPBeadedChainRight: Beaded chain (diameter=3mm, spacing=4mm)": {
+                "count": 1
+            }
+        },
+        "printed": {},
+        "routed": {}
+    }
+]

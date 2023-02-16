@@ -1,0 +1,83 @@
+Vitamins:
+                                     W            
+                                     p            
+                                     s            
+                                     t            
+             W  W           W        e            
+             p  p        W  p        p     W      
+             g  g     W  p  s  W  W  p  W  p      
+       W     o  o     p  s  t  p  p  e  p  s      
+       p     n  n     s  t  e  s  s  r  s  t      
+       c     d  d     t  e  p  t  t  m  t  e      
+    W  o     o  o     e  p  p  e  e  o  e  p      
+ W  p  n     l  l     p  p  e  p  p  u  p  p      
+ p  a  t  W  a  a     p  e  r  p  p  n  p  e      
+ a  l  r  p  p  p     e  r  e  e  e  t  e  r      
+ l  i  o  c  e  e     r  c  n  r  r  w  r  s      
+ i  g  l  o  n  n     c  l  d  m  m  i  s  h      
+ g  n  l  n  b  c  W  l  a  s  o  o  t  h  a  W   
+ n  e  e  t  e  l  p  a  m  t  u  u  h  a  f  p   
+ e  r  r  r  a  a  p  m  p  o  n  n  i  f  t  w   
+ r  r  c  o  r  m  u  p  r  p  r  t  n  t  r  e   
+ l  i  l  l  i  p  l  l  i  l  i  l  l  l  i  i  M
+ e  g  a  l  n  d  l  e  g  e  g  e  a  e  g  g  a
+ f  h  m  e  g  2  e  f  h  f  h  f  y  f  h  h  i
+ t  t  p  r  s  0  y  t  t  t  t  t  s  t  t  t  n
+  |  |  |  |  |  |  |  |  |  | 1| 1|  |  |  |  |  |  2 Stepper motor NEMA17 x 40mm
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 1|  1 Beaded chain (diameter=3mm, spacing=4mm)
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 1|  1 Beaded chain (diameter=3mm, spacing=4mm)
+  |  |  |  |  |  |  |  |  | 2|  |  |  |  |  |  |  |  2 Microswitch SS-01 or SS-5GL
+  |  |  |  |  |  |  | 2| 2| 4|  |  | 6|  |  | 2|  | 16 Nut M3 x 2.4mm 
+  |  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  2 Nut M3nS 5.5 x 1.8mm 
+  |  | 2|  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  6 Nut M5 x 4mm 
+  |  |  | 1|  |  |  |  |  |  |  |  |  |  |  |  |  |  1 RapRapDiscount Smart Controller
+  |  |  |  |  |  |  | 3| 3|  |  |  |  |  |  |  |  |  6 Screw M3 dome x 10mm
+  |  |  |  |  |  |  |  |  | 4|  |  |  |  |  |  |  |  4 Screw M3 dome x 12mm
+  |  |  | 4|  |  |  |  |  |  |  |  |  |  |  | 2|  |  6 Screw M3 dome x 20mm
+  |  |  |  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  4 Screw M3 dome x  8mm
+  |  |  |  |  |  | 2|  |  |  | 3| 3|  |  |  |  |  |  8 Screw M3 pan x  8mm
+  |  | 2|  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  6 Screw M5 hex x 20mm
+  |  |  |  |  |  |  |  |  |  | 3| 3|  |  |  |  |  |  6 Washer star M3 x 0.5mm
+  |  |  | 4|  |  |  | 5| 5| 4| 3| 3|  |  |  | 2|  | 26 Washer  M3 x 7mm x 0.5mm
+
+Printed:
+ 2| 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  4 WPAlignerIdler.stl
+ 1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  1 WPAlignerLeft.stl
+  | 1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  1 WPAlignerRight.stl
+  |  | 2|  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  6 WPClampScrewGrip.stl
+  |  | 2|  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  6 WPClampScrewShoe.stl
+  |  | 1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  1 WPControllerClamp.stl
+  |  |  |  | 1|  |  |  |  |  |  |  |  |  |  |  |  |  1 WPGondolaPenBearingLeft.stl
+  |  |  |  | 1|  |  |  |  |  |  |  |  |  |  |  |  |  1 WPGondolaPenBearingRight.stl
+  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  |  2 WPGondolaPenClampD30Part1.stl
+  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  |  2 WPGondolaPenClampD30Part2.stl
+  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  |  2 WPGondolaPenClampD30Part3.stl
+  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  |  2 WPGondolaPenClampD30Part4.stl
+  |  |  |  |  |  | 2|  |  |  |  |  |  |  |  |  |  |  2 WPPulley.stl
+  |  |  |  |  |  |  | 1|  |  |  |  |  |  |  |  |  |  1 WPStepperClampLeft.stl
+  |  |  |  |  |  |  |  | 1|  |  |  |  |  |  |  |  |  1 WPStepperClampRight.stl
+  |  |  |  |  |  |  |  |  | 1|  |  |  |  |  |  |  |  1 WPStepperEndstopLeft.stl
+  |  |  |  |  |  |  |  |  | 1|  |  |  |  |  |  |  |  1 WPStepperEndstopRight.stl
+  |  |  |  |  |  |  |  |  |  |  |  | 2|  |  |  |  |  2 WPStepperMountWithInlays.stl
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 2|  |  2 WPWeightBottom.stl
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 2|  |  2 WPWeightIdler.stl
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 2|  |  2 WPWeightTop.stl
+
+Assemblies:
+  1 WPAlignerLeft_assembly
+  1 WPAlignerRight_assembly
+  1 WPControllerClamp_assembly
+  1 WPController_assembly
+  1 WPGondolaPenBearings_assembly
+  2 WPGondolaPenClampD20_assemblies
+  2 WPPulley_assemblies
+  2 WPStepperClampLeft_assemblies
+  2 WPStepperClampRight_assemblies
+  2 WPStepperEndstopLeft_assemblies
+  1 WPStepperMounRight_assembly
+  1 WPStepperMountLeft_assembly
+  2 WPStepperMountWithInlays_assemblies
+  1 WPStepperShaftLeft_assembly
+  1 WPStepperShaftRight_assembly
+  2 WPWeight_assemblies
+  1 main_assembly

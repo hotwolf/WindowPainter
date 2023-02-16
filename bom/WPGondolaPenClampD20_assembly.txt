@@ -1,0 +1,6 @@
+WPGondolaPenClampD20_assemblies:
+Printed:
+  2 WPGondolaPenClampD30Part1.stl
+  2 WPGondolaPenClampD30Part2.stl
+  2 WPGondolaPenClampD30Part3.stl
+  2 WPGondolaPenClampD30Part4.stl
