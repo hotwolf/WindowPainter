@@ -160,7 +160,7 @@ module WPStepperMount(inlay=true) {
 *WPStepperMount();
 
 module WPStepperMountWithInlays_stl() {
-  stl("WPStepperMount");
+  stl("WPStepperMountWithInlays");
   color(pp1_colour)
   WPStepperMount(inlay=true);
 }

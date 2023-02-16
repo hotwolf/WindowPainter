@@ -81,7 +81,7 @@ module main_assembly() {
     }
 }
 
-if($preview||true) {
+if($preview) {
     
   main_assembly();
 }
