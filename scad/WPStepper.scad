@@ -78,7 +78,7 @@ module WPStepperLeft_assembly() {
       
       //EndStop  
       translate([-weightOffsX,-weightOffsY,0]) WPStepperEndstopLeft_assembly();
-      translate([weightOffsX,-weightOffsY,0]) WPStepperEndstopScrewsLeft();
+      translate([-weightOffsX,-weightOffsY,0]) WPStepperEndstopScrewsLeft();
    }   
   }
 }

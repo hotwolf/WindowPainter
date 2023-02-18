@@ -60,8 +60,8 @@ use <../models/windowFrame.scad>
 //use <../scad/WPStepperShaft.scad>
 //use <../scad/WPStepperClamp.scad>
 //use <../scad/WPEndstop.scad>
-use <../scad/WPGondolaPen.scad>
-use <../scad/WPGondolaLifter.scad>
+//use <../scad/WPGondolaPen.scad>
+//use <../scad/WPGondolaLifter.scad>
 
 //Global variables
 //================

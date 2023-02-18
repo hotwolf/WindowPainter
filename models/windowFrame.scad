@@ -102,8 +102,8 @@ module windowFrame(xOffset=0,
         step=0.01;
         for (i=[step:step:1]) {
           hull() {
-            translate([drawingXF(i),drawingYF(i),0]) circle(5);
-            translate([drawingXF(i-step),drawingYF(i-step),0]) circle(5);
+            translate([drawingXF(i),drawingYF(i),0]) circle(1);
+            translate([drawingXF(i-step),drawingYF(i-step),0]) circle(1);
           }
         }
       }   

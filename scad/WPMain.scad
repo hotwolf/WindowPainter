@@ -49,14 +49,14 @@
 //! | &#10060; | Build a prototype |
 //! | &#10060; | Refine the design |
 //! | &#10060; | Setup a project web site |
-//! | &#9989;  | Render an animated title picture |
+//! | &#9989; | Render an animated title picture |
 //! | &#10060; | Configure/customize the Marlin firmware |
 //! | &#10060; | Plot the first image |
 
 include <./WPConfig.scad>
 
 use <../scad/WPStepper.scad>
-use <../scad/WPGondolaPen.scad>
+use <../scad/WPGondola.scad>
 use <../scad/WPWeight.scad>
 use <../scad/WPController.scad>
 use <../scad/WPBeadedChain.scad>
@@ -81,7 +81,7 @@ module main_assembly() {
       WPStepperRight_assembly();
 
       //Gondola
-      translate([gondolaX,gondolaY,0]) WPGondolaPenBearings_assembly();
+      translate([gondolaX,gondolaY,0]) WPGondola_assembly();
 
       //Left weight
       translate([-weightOffsX,-weightLeftY,0]) WPWeight_assembly();
