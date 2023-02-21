@@ -36,6 +36,7 @@ include <WPConfig.scad>
 use <./WPWeight.scad>
 use <./WPStepperShaft.scad>
 use <./WPStepperEndstop.scad>
+use <../scad/WPGondolaBearings.scad>
 
 //Set view
 //$vpt = [8,10,20];
@@ -92,7 +93,8 @@ module WPBeadedChainLeft() {
     //Aligner to gondola
     hull() {  
       WPStepperShaftLeftEndBead();
-      bead(x=gondolaX,
+      WPGondolaBearingLeftStartBead(); 
+      *bead(x=gondolaX,
            y=gondolaY);
     } 
   }    
@@ -122,7 +124,8 @@ module WPBeadedChainRight() {
     //Aligner to gondola
     hull() {  
       WPStepperShaftRightEndBead();
-      bead(x=gondolaX,
+      WPGondolaBearingRightStartBead();
+      *bead(x=gondolaX,
            y=gondolaY);
     } 
   }    

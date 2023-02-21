@@ -33,7 +33,7 @@
 
 include <./WPConfig.scad>
 
-use <../scad/WPGondolaPen.scad>
+use <../scad/WPGondolaBearings.scad>
 use <../scad/WPGondolaLifter.scad>
 
 //Set view
@@ -44,6 +44,9 @@ use <../scad/WPGondolaLifter.scad>
 module WPGondola_assembly() {
   pose([1,0,5], [0,250,320])
   assembly("WPGondola") {
+
+
+   translate([0,0,0])  WPGondolaBearings_assembly();
 
    translate([0,-40,0]) WPGondolaLifter_assembly();
       

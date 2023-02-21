@@ -50,24 +50,25 @@ module bcCutout(bcBeadD    = 3.2,   //Bead diameter (+tolerance)
 }
 *bcCutout();
 
-module bcCutoutLine(bcBeadD    = 3.2,  //Bead diameter (+tolerance)
+module bcCutoutLine(bcBeadD    = 3.2,   //Bead diameter (+tolerance)
                     bcBeadS    = 4,     //Bead spacing (distance between center of beads)
                     bcCordD    = 1,     //Cord diameter
-                    bcOpeningD = 2.8,  //Hole opening
-                    bcOpeningH = 20,   //Hole height
-                    bcC        = 4)    //Bead count
+                    bcOpeningD = 2.8,   //Hole opening
+                    bcOpeningH = 20,    //Hole height
+                    bcC        = 4,     //Bead count
+                    tiltFirst  = false) //Tilt first cutout
 {
   union() {  
     for (i=[0:bcBeadS:(bcC-1)*bcBeadS]) {
       //Beads
-      translate([-i,0,0]) 
+      translate([-i,0,0]) rotate([0,(i==0)&&tiltFirst?-45:0,0]) 
       bcCutout(bcBeadD    = bcBeadD,      //Bead diameter (+tolerance)
                bcOpeningD = bcOpeningD,   //Hole opening
                bcOpeningH = bcOpeningH);  //Hole height
     }
     //Chain
-    translate([0.5*bcBeadS,0,0]) rotate([0,270,0]) cylinder(h=bcC*bcBeadS,d=bcCordD);    
-    translate([-(bcC-0.5)*bcBeadS,-bcCordD/2,0]) cube([bcC*bcBeadS,bcCordD,bcOpeningH]);    
+    translate([bcBeadS,0,0]) rotate([0,270,0]) cylinder(h=(bcC+0.5)*bcBeadS,d=bcCordD);    
+    translate([-(bcC-0.5)*bcBeadS,-bcCordD/2,0]) cube([(bcC+0.5)*bcBeadS,bcCordD,bcOpeningH]);    
   }
 }
 *bcCutoutLine();

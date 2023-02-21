@@ -22,7 +22,7 @@
 //#                                                                             #
 //###############################################################################
 //# Description:                                                                #
-//#   The pen clamp                                                             #
+//#   The pen clamp and cain mount                                              #
 //#                                                                             #
 //###############################################################################
 //# Version History:                                                            #
@@ -33,9 +33,35 @@
 
 include <./WPConfig.scad>
 
+use <./WPBeadedChain.scad>
+
+use <../printed/beadedChainMount.scad>
+
 //Set view
 //$vpt = [1,0,5];
 //$vpr = [0,250,320];
+
+//Beaded chain parts
+//==================
+//Left end bead
+module WPGondolaBearingLeftStartBead(offsX=gondolaX,
+                                     offsY=gondolaY,
+                                     offsA=90+stepperLeftA) {
+  transrot([offsX,offsY,0],[0,0,offsA])
+  bead(x=0,
+       y=44-3*bcBeadS);                    
+}
+*WPGondolaBearingLeftStartBead(0,0);
+
+//Left end bead
+module WPGondolaBearingRightStartBead(offsX=gondolaX,
+                                      offsY=gondolaY,
+                                      offsA=-stepperRightA) {
+  transrot([offsX,offsY,0],[0,0,offsA])
+  bead(x=0,
+       y=44-3*bcBeadS);                    
+}
+*WPGondolaBearingRightStartBead(0,0);
 
 //Pen clamp settings
 penClampL1 = 10; //Depth of the clamp
@@ -126,9 +152,65 @@ module WPGondolaPenClampD30_assembly() {
   }  
 }
 
-module WPGondolaPenBearingLeft_stl() {
-  stl("WPGondolaPenBearingLeft");
-  
+module cylinderBearingInnerConnector(a=0,l=20) {
+  rotate([0,0,a]) {
+      
+    linear_extrude(height=10,twist=-90/PI)
+    difference() {
+      circle(d=40);
+      union() {
+        rotate([0,0,270-(45/PI)]) translate([-25,0,0]) square([50,30]); 
+        rotate([0,0,90-(135/PI)]) translate([-25,0,0]) square([50,30]); 
+        rotate([0,0,-(90/PI)]) translate([-10,-16,0]) square([20,40]);
+        *circle(d=36);          
+      }
+  }
+
+    transrot([0,0,10],[0,0,0])
+    linear_extrude(height=l)
+    difference() {
+      circle(d=40);
+      union() {
+        rotate([0,0,270+(45/PI)]) translate([-25,0,0]) square([50,30]); 
+        rotate([0,0,90-(45/PI)]) translate([-25,0,0]) square([50,30]); 
+        rotate([0,0,0]) translate([-10,-16,0]) square([20,40]);
+        *circle(d=36);          
+      }
+    }
+  } 
+}
+
+module WPGondolaBearing_stl(a=0) {
+  stl("WPGondolaBearing");
+  color(pp2_colour)  
+  translate([0,0,-5]) {
+    
+    //Chain mount
+    rotate([0,0,a])
+    difference() {
+      union() {
+        translate([0,44,0]) cylinder(h=5,d=bcBeadD+2);
+        translate([0,44,5]) sphere(d=bcBeadD+2);
+        translate([-(bcBeadD+2)/2,29,0])  cube([bcBeadD+2,15,5]);
+        transrot([0,29,5],[270,0,0]) cylinder(h=15,d=bcBeadD+2);
+     
+      }
+      union() {
+        transrot([0,44,5],[0,0,90]) 
+        bcCutoutLine(bcBeadD    = bcBeadD,   //Bead diameter (+tolerance)
+                     bcBeadS    = bcBeadS,     //Bead spacing (distance between center of beads)
+                     bcCordD    = bcCordD,     //Cord diameter
+                     bcOpeningD = bcBeadD-0.4,   //Hole opening
+                     bcOpeningH = 20,    //Hole height
+                     bcC        = 4,     //Bead count
+                     tiltFirst  = true); //Tilt first cutout          
+        translate([0,0,4.8]) cylinder(h=10,r=30.2);   
+        transrot([-bcBeadD,44-bcBeadS/2,6+bcBeadD/2],[0,90,0]) cylinder(h=2*bcBeadD,d=bcBeadD);
+        translate([-bcBeadD,32-bcBeadS/2,6]) cube([2*bcBeadD,12,10]);
+      }
+    }
+      
+    //Bearing
     cylinderBearing(height                  = 4.8,  // Height of the bearing
                     spacer                  = 0.2,  // Width of a spacer at the inner ring
 	                inner_radius            = 20.0, // Inner ring radius. Half of the diameter
@@ -141,10 +223,12 @@ module WPGondolaPenBearingLeft_stl() {
 	                ball_height_space       = 0.0,  // Clearance between height of the rings and the height rolling elements
 	                guide_size_ratio        = 0.5,  // Ratio of height of the guidance elevation
 	                ball_guide_height       = 0.8); // Elevation of the guidance element
-
-
     
-    
+     
+    cylinderBearingInnerConnector(a=0,l=16);
+    cylinderBearingInnerConnector(a=90,l=8);
+    cylinderBearingInnerConnector(a=-90,l=8);
+  }
 }
 
 module WPGondolaPenBearingRight_stl() {
@@ -169,15 +253,15 @@ module WPGondolaPenBearingRight_stl() {
 }
 
 //! TBD
-module WPGondolaPenBearings_assembly() {
+module WPGondolaBearings_assembly() {
   pose([1,0,5], [0,250,320])
   assembly("WPGondolaPenBearings") {
 
-    transrot([0,0,-5],[0,0,0])   WPGondolaPenBearingLeft_stl();
-    transrot([0,0,5],[0,180,0]) WPGondolaPenBearingRight_stl();
+    transrot([0,0,0],[0,0,0])   WPGondolaBearing_stl(90+stepperLeftA);
+    transrot([0,0,0],[0,180,0]) WPGondolaBearing_stl(stepperRightA);
 
-    transrot([0,0,10],[0,0,0])  WPGondolaPenClampD30_assembly();
-    transrot([0,0,-10],[0,180,0])  WPGondolaPenClampD30_assembly();
+    *transrot([0,0,10],[0,0,0])  WPGondolaPenClampD30_assembly();
+    *transrot([0,0,-10],[0,180,0])  WPGondolaPenClampD30_assembly();
 
 
   }  
@@ -192,7 +276,7 @@ if($preview) {
 //   $explode = 1;
    *WPGondolaPenClampD30_assembly();
     
-    WPGondolaPenBearings_assembly();
+    WPGondolaBearings_assembly();
     
       *translate([-winW/2,winH/2,-44]) windowFrame(glassHeight=winH,
                                                   glassWidth=winW); 
