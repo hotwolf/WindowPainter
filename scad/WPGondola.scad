@@ -48,7 +48,7 @@ module WPGondola_assembly() {
 
    translate([0,0,0])  WPGondolaBearings_assembly();
 
-   translate([0,-40,0]) WPGondolaLifter_assembly();
+   translate([0,-42,0]) WPGondolaLifter_assembly();
       
    translate([0,0,-44]) pen(r=undef,d=18);
 

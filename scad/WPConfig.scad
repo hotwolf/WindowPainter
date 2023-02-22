@@ -79,6 +79,8 @@ gondolaX = drawingX($t); //X coordiate of the gondola
 gondolaY = drawingY($t); //Y coordinate of the gondola
 //gondolaX =  0*winW; //X coordiate of the gondola
 //gondolaY = -winH; //Y coordinate of the gondola
+//gondolaX =  0.7*winW; //X coordiate of the gondola
+//gondolaY = -0.7*winH; //Y coordinate of the gondola
 
 //Beaded chain
 bcBeadD = 3.2;     //Bead diameter (+tolerance)
