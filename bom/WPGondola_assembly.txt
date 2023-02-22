@@ -1,0 +1,7 @@
+WPGondola_assembly:
+Vitamins:
+  1 Window pen
+
+Assemblies:
+  1 WPGondolaLifter_assembly
+  1 WPGondolaPenBearings_assembly

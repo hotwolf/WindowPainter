@@ -1,0 +1,6 @@
+WPGondolaPenClampD18_assemblies:
+Printed:
+  2 WPGondolaPenClampD18Part1.stl
+  2 WPGondolaPenClampD18Part2.stl
+  2 WPGondolaPenClampD18Part3.stl
+  2 WPGondolaPenClampD18Part4.stl

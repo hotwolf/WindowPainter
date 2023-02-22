@@ -1,7 +1,6 @@
 WPGondolaPenBearings_assembly:
 Printed:
-  1 WPGondolaPenBearingLeft.stl
-  1 WPGondolaPenBearingRight.stl
+  2 WPGondolaBearing.stl
 
 Assemblies:
-  2 WPGondolaPenClampD20_assemblies
+  2 WPGondolaPenClampD18_assemblies

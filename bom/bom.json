@@ -88,7 +88,35 @@
         "routed": {}
     },
     {
-        "name": "WPGondolaPenClampD20_assembly",
+        "name": "WPGondolaLifter_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {},
+        "vitamins": {
+            "sg90(): SG90 servo motor": {
+                "count": 1
+            }
+        },
+        "printed": {
+            "WPServoGear.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPServoLifter.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            },
+            "WPWeightBottom.stl": {
+                "count": 1,
+                "colour": "[0, 0.572549, 0]"
+            }
+        },
+        "routed": {}
+    },
+    {
+        "name": "WPGondolaPenClampD18_assembly",
         "big": null,
         "ngb": false,
         "zoomed": 0,
@@ -96,19 +124,19 @@
         "assemblies": {},
         "vitamins": {},
         "printed": {
-            "WPGondolaPenClampD30Part1.stl": {
+            "WPGondolaPenClampD18Part1.stl": {
                 "count": 2,
                 "colour": "[0, 0.572549, 0]"
             },
-            "WPGondolaPenClampD30Part2.stl": {
+            "WPGondolaPenClampD18Part2.stl": {
                 "count": 2,
                 "colour": "[0, 0.572549, 0]"
             },
-            "WPGondolaPenClampD30Part3.stl": {
+            "WPGondolaPenClampD18Part3.stl": {
                 "count": 2,
                 "colour": "[0, 0.572549, 0]"
             },
-            "WPGondolaPenClampD30Part4.stl": {
+            "WPGondolaPenClampD18Part4.stl": {
                 "count": 2,
                 "colour": "[0, 0.572549, 0]"
             }
@@ -122,19 +150,33 @@
         "zoomed": 0,
         "count": 1,
         "assemblies": {
-            "WPGondolaPenClampD20_assembly": 2
+            "WPGondolaPenClampD18_assembly": 2
         },
         "vitamins": {},
         "printed": {
-            "WPGondolaPenBearingLeft.stl": {
-                "count": 1,
-                "colour": "[0, 0.572549, 0]"
-            },
-            "WPGondolaPenBearingRight.stl": {
-                "count": 1,
+            "WPGondolaBearing.stl": {
+                "count": 2,
                 "colour": "[0, 0.572549, 0]"
             }
         },
+        "routed": {}
+    },
+    {
+        "name": "WPGondola_assembly",
+        "big": null,
+        "ngb": false,
+        "zoomed": 0,
+        "count": 1,
+        "assemblies": {
+            "WPGondolaPenBearings_assembly": 1,
+            "WPGondolaLifter_assembly": 1
+        },
+        "vitamins": {
+            "pen(): Window pen": {
+                "count": 1
+            }
+        },
+        "printed": {},
         "routed": {}
     },
     {
@@ -438,7 +480,7 @@
         "assemblies": {
             "WPStepperClampLeft_assembly": 1,
             "WPStepperClampRight_assembly": 1,
-            "WPGondolaPenBearings_assembly": 1,
+            "WPGondola_assembly": 1,
             "WPWeight_assembly": 2,
             "WPController_assembly": 1
         },

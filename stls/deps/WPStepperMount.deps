@@ -14,7 +14,6 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/utils/core/rounded_rectangle.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/teardrops.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/sphere.scad \
-	/home/dirk/Tools/NopSCADlib/utils/round.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_triangle.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_polygon.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/pcbs.scad \
@@ -211,7 +210,6 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Projects/WindowPainter/printed/sg90Spline.scad \
 	/home/dirk/Tools/NopSCADlib/utils/dogbones.scad \
 	/home/dirk/Projects/WindowPainter/models/windowFrame.scad \
-	/home/dirk/Projects/WindowPainter/scad/WPGondolaLifter.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/light_strip.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/global.scad \
@@ -224,8 +222,6 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/ziptie.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/psus.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/ziptie.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/7_segments.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/fans.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/blowers.scad \
 	/home/dirk/Tools/NopSCADlib/utils/quadrant.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/leadnuts.scad \
@@ -256,6 +252,8 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/green_terminals.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/magnet.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/green_terminal.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/fans.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/7_segments.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/7_segment.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/potentiometer.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/polyholes.scad \
@@ -281,9 +279,6 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/led_meter.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/bulldogs.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/bulldog.scad \
-	/home/dirk/Tools/NopSCADlib/utils/offset.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/rail.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/pillar.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/ring_terminal.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/cameras.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/extrusions.scad \
@@ -307,6 +302,7 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/rails.scad \
 	/home/dirk/Tools/NopSCADlib/utils/bezier.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/rod.scad \
+	/home/dirk/Tools/NopSCADlib/utils/round.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/extrusion.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/servo_motor.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/veroboard.scad \
@@ -317,6 +313,9 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/sk_brackets.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/spools.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/spool.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/rail.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/pillar.scad \
+	/home/dirk/Tools/NopSCADlib/utils/offset.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/linear_bearing.scad \
 	/home/dirk/Tools/NopSCADlib/utils/maths.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/ssrs.scad \
@@ -333,7 +332,6 @@ stls/WPStepperMountWithInlays.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/toggle.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/cable_strip.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformers.scad \
-	/home/dirk/Projects/WindowPainter/scad/WPGondolaPen.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/tubing.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/button.scad \

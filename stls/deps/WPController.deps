@@ -14,7 +14,6 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Tools/NopSCADlib/utils/core/rounded_rectangle.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/teardrops.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/sphere.scad \
-	/home/dirk/Tools/NopSCADlib/utils/round.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_triangle.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_polygon.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/pcbs.scad \
@@ -209,7 +208,6 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Projects/WindowPainter/printed/sg90Spline.scad \
 	/home/dirk/Tools/NopSCADlib/utils/dogbones.scad \
 	/home/dirk/Projects/WindowPainter/models/windowFrame.scad \
-	/home/dirk/Projects/WindowPainter/scad/WPGondolaLifter.scad \
 	/home/dirk/Projects/WindowPainter/scad/WPClampScrew.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/light_strip.scad \
@@ -224,14 +222,10 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/ziptie.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/psus.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/ziptie.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/7_segments.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/fans.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/blowers.scad \
 	/home/dirk/Tools/NopSCADlib/utils/quadrant.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/leadnuts.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/fan.scad \
-	/home/dirk/Tools/NopSCADlib/utils/layout.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/spades.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/spring.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/module.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/variacs.scad \
@@ -258,6 +252,8 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/green_terminals.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/magnet.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/green_terminal.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/fans.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/7_segments.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/7_segment.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/potentiometer.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/polyholes.scad \
@@ -310,6 +306,7 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/rails.scad \
 	/home/dirk/Tools/NopSCADlib/utils/bezier.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/rod.scad \
+	/home/dirk/Tools/NopSCADlib/utils/round.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/extrusion.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/servo_motor.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/veroboard.scad \
@@ -336,7 +333,6 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Tools/NopSCADlib/vitamins/toggle.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/cable_strip.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformers.scad \
-	/home/dirk/Projects/WindowPainter/scad/WPGondolaPen.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/tubing.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/button.scad \
@@ -358,4 +354,6 @@ stls/WPControllerClamp.stl: \
 	/home/dirk/Tools/NopSCADlib/utils/rounded_cylinder.scad \
 	/home/dirk/Tools/NopSCADlib/utils/tube.scad \
 	/home/dirk/Tools/NopSCADlib/utils/gears.scad \
-	/home/dirk/Tools/NopSCADlib/utils/fillet.scad
+	/home/dirk/Tools/NopSCADlib/utils/fillet.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/spades.scad \
+	/home/dirk/Tools/NopSCADlib/utils/layout.scad

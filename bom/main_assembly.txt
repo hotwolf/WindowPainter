@@ -5,7 +5,7 @@ Vitamins:
 
 Assemblies:
   1 WPController_assembly
-  1 WPGondolaPenBearings_assembly
+  1 WPGondola_assembly
   1 WPStepperClampLeft_assembly
   1 WPStepperClampRight_assembly
   2 WPWeight_assemblies

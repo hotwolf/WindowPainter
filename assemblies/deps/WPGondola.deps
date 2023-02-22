@@ -1,4 +1,5 @@
-tmp/WPGondolaPenBearings_assembly.png: \
+tmp/WPGondola_assembly.png: \
+	/home/dirk/Projects/WindowPainter/scad/WPStepperMount.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/e3d.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/jhead.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/dip.scad \
@@ -7,6 +8,8 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/core/teardrops.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/core/polyholes.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/core/sphere.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPStepperEndstop.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPStepperShaft.scad \
 	/home/dirk/Tools/NopSCADlib/printed/fan_guard.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/e3d.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/jhead.scad \
@@ -15,6 +18,7 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/utils/core/teardrops.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/sphere.scad \
 	/home/dirk/Tools/NopSCADlib/utils/round.scad \
+	/home/dirk/Tools/NopSCADlib/utils/rounded_triangle.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_triangle.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/rounded_polygon.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/pcbs.scad \
@@ -36,6 +40,7 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/extrusions.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/geared_stepper.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/bearing_block.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPBeadedChain.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/rail.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/panel_meters.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/ring_terminal.scad \
@@ -70,7 +75,6 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/vitamins/hot_ends.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/magnet.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/offset.scad \
-	/home/dirk/Tools/NopSCADlib/utils/rounded_triangle.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/ssrs.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/sheets.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/pillars.scad \
@@ -106,6 +110,7 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/7_segments.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/axials.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/utils/round.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPAligner.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/ball_bearing.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/psus.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/green_terminal.scad \
@@ -210,7 +215,9 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Projects/WindowPainter/printed/sg90Spline.scad \
 	/home/dirk/Tools/NopSCADlib/utils/dogbones.scad \
 	/home/dirk/Projects/WindowPainter/models/windowFrame.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPGondolaBearings.scad \
 	/home/dirk/Projects/WindowPainter/scad/WPGondolaLifter.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPWeight.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/light_strip.scad \
 	/home/dirk/Tools/NopSCADlib/utils/core/global.scad \
@@ -230,6 +237,8 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/utils/quadrant.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/leadnuts.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/fan.scad \
+	/home/dirk/Tools/NopSCADlib/utils/layout.scad \
+	/home/dirk/Tools/NopSCADlib/vitamins/spades.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/spring.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/module.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/variacs.scad \
@@ -326,6 +335,7 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/vitamins/swiss_clips.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/wire.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/swiss_clip.scad \
+	/home/dirk/Projects/WindowPainter/scad/WPPulley.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/box_section.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/displays.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/ldr.scad \
@@ -333,7 +343,6 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/vitamins/toggle.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/cable_strip.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformers.scad \
-	/home/dirk/Projects/WindowPainter/scad/WPGondolaPen.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/transformer.scad \
 	/home/dirk/Tools/NopSCADlib/vitamins/tubing.scad \
 	/home/dirk/Projects/WindowPainter/lib/NopSCADlib/vitamins/button.scad \
@@ -355,6 +364,4 @@ tmp/WPGondolaPenBearings_assembly.png: \
 	/home/dirk/Tools/NopSCADlib/utils/rounded_cylinder.scad \
 	/home/dirk/Tools/NopSCADlib/utils/tube.scad \
 	/home/dirk/Tools/NopSCADlib/utils/gears.scad \
-	/home/dirk/Tools/NopSCADlib/utils/fillet.scad \
-	/home/dirk/Tools/NopSCADlib/vitamins/spades.scad \
-	/home/dirk/Tools/NopSCADlib/utils/layout.scad
+	/home/dirk/Tools/NopSCADlib/utils/fillet.scad

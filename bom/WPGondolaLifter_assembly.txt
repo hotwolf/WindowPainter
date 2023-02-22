@@ -1,0 +1,8 @@
+WPGondolaLifter_assembly:
+Vitamins:
+  1 SG90 servo motor
+
+Printed:
+  1 WPServoGear.stl
+  1 WPServoLifter.stl
+  1 WPWeightBottom.stl
